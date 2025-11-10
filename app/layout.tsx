@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono, Poppins } from 'next/font/google'
 import './globals.css'
 import { cn } from '@/lib/utils'
+import { Header } from './components/header'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -37,7 +38,10 @@ export default function RootLayout({
           'antialiased'
         )}
       >
-        <main className='min-h-screen relative w-dvw'>{children}</main>
+        <main className='min-h-screen relative w-dvw'>
+          <Header />
+          {children}
+        </main>
       </body>
     </html>
   )
