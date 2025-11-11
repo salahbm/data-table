@@ -17,8 +17,8 @@ import {
 } from '@tanstack/react-table'
 import { parseAsInteger, type UseQueryStateOptions, useQueryState } from 'nuqs'
 import * as React from 'react'
-import { ISort, UseDataTableProps } from './table.types'
-import { getSortingStateParser } from './table-sorting'
+import { ISort, UseDataTableProps } from '../types/table.types'
+import { getSortingStateParser } from '../utils/table-sorting'
 
 const PAGE_KEY = 'page'
 const SIZE_KEY = 'size'

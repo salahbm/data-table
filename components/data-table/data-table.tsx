@@ -7,10 +7,8 @@ import { Button } from '@/components/ui/button'
 
 import { cn } from '@/lib/utils'
 
-import Pagination from './pagination'
-import { getCommonPinningStyles } from './pinned-columns'
-import { DataTableProps } from './table.types'
-import { DataTableResetSortings } from './table-reset-sorting'
+import Pagination from './components/pagination'
+import { DataTableResetSortings } from './components/table-reset-sorting'
 import {
   Table,
   TableBody,
@@ -18,8 +16,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from './table-ui'
-import { DataTableViewOptions } from './table-view-options'
+} from './components/table-ui'
+import { DataTableViewOptions } from './components/table-view-options'
+import { DataTableProps } from './types/table.types'
+import { getCommonPinningStyles } from './utils/pinned-columns'
 
 export function DataTable<TData>({
   table,

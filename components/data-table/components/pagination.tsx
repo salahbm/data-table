@@ -18,7 +18,7 @@ import { cn } from '@/lib/utils'
 export default function Pagination<TData>({
   table,
   className,
-  sizeOptions = [50, 100, 150, 200],
+  sizeOptions = [10, 50, 100, 150, 200],
 }: {
   table: Table<TData>
   className?: string
@@ -48,7 +48,7 @@ export default function Pagination<TData>({
         type='button'
         onClick={() => handlePageChange(i)}
         variant={currentPage === i ? 'default' : 'ghost'}
-        className='font-body-2 size-6 rounded'
+        className='font-medium size-6 rounded'
         size='icon'
       >
         {i + 1} {/* display as 1-based in UI only */}

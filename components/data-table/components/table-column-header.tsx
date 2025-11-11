@@ -33,7 +33,7 @@ export function DataTableColumnHeader<TData, TValue>({
     <DropdownMenu>
       <DropdownMenuTrigger
         className={cn(
-          'hover:bg-background focus:ring-ring data-[state=open]:bg-accent [&_svg]:text-muted-foreground -ml-1.5 flex h-fit w-full cursor-pointer items-center justify-center gap-1.5 rounded px-2 focus:ring-1 focus:outline-none [&_svg]:size-4 [&_svg]:shrink-0',
+          'hover:bg-background focus:ring-ring data-[state=open]:bg [&_svg]:text-muted-foreground -ml-1.5 flex h-fit w-full cursor-pointer items-center justify-center gap-1.5 rounded px-2 focus:ring-1 focus:outline-none [&_svg]:size-4 [&_svg]:shrink-0',
           className
         )}
         {...props}
@@ -52,7 +52,7 @@ export function DataTableColumnHeader<TData, TValue>({
         {column.getCanSort() && (
           <>
             <DropdownMenuItem
-              className='text-accent-foreground gap-1.5'
+              className='text-foreground gap-1.5'
               disabled={column.getIsSorted() === 'asc'}
               onClick={() => column.toggleSorting(false)}
             >
@@ -60,7 +60,7 @@ export function DataTableColumnHeader<TData, TValue>({
               Asc
             </DropdownMenuItem>
             <DropdownMenuItem
-              className='text-accent-foreground gap-1.5'
+              className='text-foreground gap-1.5'
               disabled={column.getIsSorted() === 'desc'}
               onClick={() => column.toggleSorting(true)}
             >
@@ -69,7 +69,7 @@ export function DataTableColumnHeader<TData, TValue>({
             </DropdownMenuItem>
             {column.getIsSorted() && (
               <DropdownMenuItem
-                className='text-accent-foreground gap-1.5'
+                className='text-foreground gap-1.5'
                 onClick={() => column.clearSorting()}
               >
                 <X className='size-5' />
@@ -80,7 +80,7 @@ export function DataTableColumnHeader<TData, TValue>({
         )}
         {column.getCanHide() && (
           <DropdownMenuItem
-            className='text-accent-foreground gap-1.5'
+            className='text-foreground gap-1.5'
             disabled={!column.getIsVisible()}
             onClick={() => column.toggleVisibility(false)}
           >
