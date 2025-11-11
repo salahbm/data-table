@@ -11,14 +11,16 @@ export interface DataTableProps<TData> {
   isLoading?: boolean
 
   // classNames
-  className?: string
-  tbodyClassName?: string
-  tableClassName?: string
-  theadClassName?: string
-  trHeaderClassName?: string
-  tdClassName?: string
-  trClassName?: string
-  paginationClassName?: string
+  className?: {
+    container?: string
+    table?: string
+    tbody?: string
+    thead?: string
+    trHeader?: string
+    td?: string
+    tr?: string
+    pagination?: string
+  }
 
   // form control
   form?: UseFormReturn<FieldValues>

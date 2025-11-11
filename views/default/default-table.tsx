@@ -1,13 +1,7 @@
 'use client'
 import { useQuery } from '@tanstack/react-query'
 import { parseAsInteger, parseAsJson, useQueryStates } from 'nuqs'
-import { useState } from 'react'
-import {
-  DataTable,
-  ISort,
-  mapTableDragEnd,
-  useDataTable,
-} from '@/components/data-table'
+import { DataTable, ISort, useDataTable } from '@/components/data-table'
 import { getProducts } from '@/lib/products'
 import { Product } from '@/lib/types'
 import { DEFAULT_COLUMNS } from './default-columns'
@@ -27,7 +21,6 @@ interface DefaultTableProps {
 }
 
 export const DefaultTable = ({ initialData }: DefaultTableProps) => {
-  const [data, setData] = useState<Product[]>(initialData.data)
   const [params] = useQueryStates(
     {
       page: parseAsInteger.withDefault(1),
@@ -58,7 +51,7 @@ export const DefaultTable = ({ initialData }: DefaultTableProps) => {
   })
 
   const { table } = useDataTable<Product>({
-    data: data,
+    data: response.data.data,
     columns: DEFAULT_COLUMNS,
     pageCount: response.data.meta.totalPages,
     getRowId: (originalRow) => originalRow.id,
@@ -71,17 +64,19 @@ export const DefaultTable = ({ initialData }: DefaultTableProps) => {
       },
     },
     meta: {
-      includeDownload: true,
-      enableRowDrag: true,
-      enableRowAnimations: true,
-      onDragEnd: (event) => {
-        const { active, over } = event
-        if (active && over && active.id !== over.id) {
-          setData(mapTableDragEnd(data, event))
-        }
-      },
+      includeDownload: false,
+      enableRowDrag: false,
+      enableRowAnimations: false,
+      includeResetSortings: false,
     },
   })
 
-  return <DataTable table={table} />
+  return (
+    <DataTable
+      table={table}
+      className={{
+        container: 'relative overflow-auto max-h-[calc(100vh-280px)]',
+      }}
+    />
+  )
 }

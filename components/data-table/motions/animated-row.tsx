@@ -15,8 +15,8 @@ function AnimatedRows<TData>({
   trClassName?: string
 }) {
   return (
-    <AnimatePresence mode='popLayout'>
-      {rows.map((row, index) => (
+    <AnimatePresence mode='wait'>
+      {rows.map((row, idx) => (
         <motion.tr
           key={row.id}
           data-state={row.getIsSelected() && 'selected'}
@@ -24,12 +24,13 @@ function AnimatedRows<TData>({
             'hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors',
             trClassName
           )}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
           transition={{
-            duration: 0.2,
-            delay: index * 0.02,
+            duration: 0.15,
+            delay: idx <= 25 ? idx * 0.02 : 0,
+            ease: 'easeOut',
           }}
         >
           {row.getVisibleCells().map((cell) => (

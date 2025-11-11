@@ -9,7 +9,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
@@ -24,79 +23,62 @@ export default function Pagination<TData>({
   className?: string
   sizeOptions?: number[]
 }) {
-  const sizesArray = useMemo(() => {
-    const set = new Set([...sizeOptions, table.getState().pagination.pageSize])
-    return Array.from(set).sort((a, b) => a - b)
-  }, [table, sizeOptions])
-
-  const currentPage = table.getState().pagination.pageIndex
+  const { pageIndex, pageSize } = table.getState().pagination
   const pageCount = table.getPageCount()
 
-  const handlePageChange = useCallback(
-    (newPage: number) => {
-      // Ensure we're using the same indexing convention throughout the app
-      // The table uses 0-based indexing internally
-      table.setPageIndex(newPage) // stays 0-based
-    },
-    [table]
-  )
+  const sizesArray = useMemo(() => {
+    return Array.from(new Set([...sizeOptions, pageSize])).sort((a, b) => a - b)
+  }, [sizeOptions, pageSize])
+
+  const goTo = useCallback((page: number) => table.setPageIndex(page), [table])
 
   const renderButton = useCallback(
     (i: number) => (
       <Button
         key={i}
         type='button'
-        onClick={() => handlePageChange(i)}
-        variant={currentPage === i ? 'default' : 'ghost'}
+        onClick={() => goTo(i)}
+        variant={pageIndex === i ? 'default' : 'ghost'}
         className='font-medium size-6 rounded'
         size='icon'
       >
-        {i + 1} {/* display as 1-based in UI only */}
+        {i + 1}
       </Button>
     ),
-    [handlePageChange, currentPage]
+    [goTo, pageIndex]
   )
 
   const renderPagination = useMemo(() => {
-    const pages: React.ReactNode[] = []
+    if (pageCount <= 1) return null
 
-    // Case 1: total pages <= 5 → show all pages directly
+    const nodes: React.ReactNode[] = []
+
+    const pushRange = (start: number, end: number) => {
+      for (let i = start; i <= end; i++) {
+        nodes.push(renderButton(i))
+      }
+    }
+
     if (pageCount <= 5) {
-      for (let i = 0; i < pageCount; i++) pages.push(renderButton(i))
+      pushRange(0, pageCount - 1)
+    } else if (pageIndex <= 2) {
+      pushRange(0, 4)
+      nodes.push(<span key='dots-end'>...</span>)
+      nodes.push(renderButton(pageCount - 1))
+    } else if (pageIndex >= pageCount - 3) {
+      nodes.push(renderButton(0))
+      nodes.push(<span key='dots-start'>...</span>)
+      pushRange(pageCount - 5, pageCount - 1)
+    } else {
+      nodes.push(renderButton(0))
+      nodes.push(<span key='dots-left'>...</span>)
+      pushRange(pageIndex - 1, pageIndex + 1)
+      nodes.push(<span key='dots-right'>...</span>)
+      nodes.push(renderButton(pageCount - 1))
     }
 
-    // Case 2: user is at the very beginning (page 0,1,2)
-    // → show first 5 pages, then dots, then last page
-    else if (currentPage <= 2) {
-      for (let i = 0; i < 5; i++) pages.push(renderButton(i))
-      pages.push(<span key='dots'>...</span>)
-      pages.push(renderButton(pageCount - 1))
-    }
-
-    // Case 3: user is in the middle (not near start/end)
-    // → show first page, dots, currentPage-1 .. currentPage+1, dots, last page
-    else if (currentPage < pageCount - 3) {
-      pages.push(renderButton(0))
-      pages.push(<span key='dots-left'>...</span>)
-      for (let i = currentPage - 1; i <= currentPage + 1; i++) {
-        pages.push(renderButton(i))
-      }
-      pages.push(<span key='dots-right'>...</span>)
-      pages.push(renderButton(pageCount - 1))
-    }
-
-    // Case 4: user is near the end (last 3 pages)
-    // → show first page, dots, last 5 pages
-    else {
-      pages.push(renderButton(0))
-      pages.push(<span key='dots'>...</span>)
-      for (let i = pageCount - 5; i < pageCount; i++) {
-        pages.push(renderButton(i))
-      }
-    }
-
-    return pages
-  }, [currentPage, pageCount, renderButton])
+    return nodes
+  }, [pageIndex, pageCount, renderButton])
 
   if (pageCount <= 1) return null
 
@@ -108,15 +90,14 @@ export default function Pagination<TData>({
       )}
     >
       <Select
-        value={`${table.getState().pagination.pageSize}`}
+        value={`${pageSize}`}
         onValueChange={(val) => table.setPageSize(Number(val))}
       >
         <SelectTrigger className='w-fit'>
-          <SelectValue placeholder='Select a fruit' />
+          <SelectValue placeholder='Rows' />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectLabel>Fruits</SelectLabel>
             {sizesArray.map((size) => (
               <SelectItem key={size} value={size.toString()}>
                 {size}
@@ -126,26 +107,28 @@ export default function Pagination<TData>({
         </SelectContent>
       </Select>
 
-      <div className='flex items-center justify-end gap-2'>
+      <div className='flex items-center gap-2'>
         <Button
           type='button'
           variant='ghost'
           size='icon'
           className='size-6 rounded'
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 0}
+          onClick={() => goTo(pageIndex - 1)}
+          disabled={pageIndex === 0}
           title='Previous page'
         >
           <ChevronLeft className='text-muted-foreground size-5' />
         </Button>
+
         {renderPagination}
+
         <Button
           type='button'
           variant='ghost'
           size='icon'
           className='size-6 rounded'
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage >= pageCount - 1}
+          onClick={() => goTo(pageIndex + 1)}
+          disabled={pageIndex >= pageCount - 1}
           title='Next page'
         >
           <ChevronRight className='text-muted-foreground size-5' />

@@ -1,4 +1,9 @@
-import { Table } from 'lucide-react'
+import {
+  BetweenHorizontalEnd,
+  Diameter,
+  Route as LucideRoute,
+  Table,
+} from 'lucide-react'
 
 interface Route {
   id: string
@@ -24,40 +29,40 @@ const routes: Route[] = [
     },
   },
   {
-    id: 'with-checkbox',
-    label: 'With Checkbox',
-    href: '/with-checkbox',
-    icon: Table,
+    id: 'with-modal',
+    label: 'With Modal',
+    href: '/with-modal',
+    icon: Diameter,
     meta: {
-      title: 'With Checkbox',
-      description: 'With Checkbox Table Component',
+      title: 'With Modal',
+      description: 'With Modal Table Component',
     },
   },
   {
-    id: 'with-pagination',
-    label: 'With Pagination',
-    href: '/with-pagination',
-    icon: Table,
+    id: 'with-dynamic-row',
+    label: 'With Dynamic Row',
+    href: '/with-dynamic-row',
+    icon: BetweenHorizontalEnd,
     meta: {
-      title: 'With Pagination',
-      description: 'With Pagination Table Component',
+      title: 'With Dynamic Row',
+      description: 'With Dynamic Row Table Component',
     },
   },
   {
-    id: 'with-child',
-    label: 'With Child',
-    href: '/with-child',
-    icon: Table,
+    id: 'with-navigation',
+    label: 'With Navigation',
+    href: '/with-navigation',
+    icon: LucideRoute,
     meta: {
-      title: 'With Child',
-      description: 'With Child Table Component',
+      title: 'With Navigation',
+      description: 'With Navigation Table Component',
     },
     children: [
       {
         id: 'with-child-1',
         label: 'With Child 1',
         href: '/with-child-1',
-        icon: Table,
+        icon: LucideRoute,
         meta: {
           title: 'With Child 1',
           description: 'With Child 1 Table Component',
@@ -67,7 +72,7 @@ const routes: Route[] = [
         id: 'with-child-2',
         label: 'With Child 2',
         href: '/with-child-2',
-        icon: Table,
+        icon: LucideRoute,
         meta: {
           title: 'With Child 2',
           description: 'With Child 2 Table Component',

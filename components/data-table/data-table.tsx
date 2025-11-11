@@ -46,7 +46,7 @@ function TableHeaderContent<TData>({
   trHeaderClassName?: string
 }) {
   return (
-    <TableHeader className='sticky top-0 z-10 bg-background shadow-sm'>
+    <TableHeader className='sticky top-0 z-10 border-b bg-red-500'>
       {table.getHeaderGroups().map((headerGroup) => (
         <TableRow key={headerGroup.id} className={trHeaderClassName}>
           {headerGroup.headers.map((header) => (
@@ -212,13 +212,6 @@ export function DataTable<TData>({
   table,
   isLoading: _,
   className,
-  tbodyClassName,
-  tableClassName,
-  theadClassName,
-  trHeaderClassName,
-  tdClassName,
-  trClassName,
-  paginationClassName,
   children,
 }: DataTableProps<TData>) {
   const meta = table.options.meta
@@ -273,41 +266,33 @@ export function DataTable<TData>({
         </div>
       </div>
 
-      <div className={className}>
+      <div className={className?.container}>
         <DndContext
           collisionDetection={closestCenter}
           modifiers={[restrictToVerticalAxis]}
           onDragEnd={table.options.meta?.onDragEnd}
           sensors={sensors}
-          // accessibility={{
-          //   announcements: {
-          //     onDragStart: () => 'Picked up draggable item.',
-          //     onDragOver: () => 'Draggable item was moved.',
-          //     onDragEnd: () => 'Draggable item was dropped.',
-          //     onDragCancel: () => 'Dragging was cancelled.',
-          //   },
-          // }}
         >
-          <Table className={tableClassName}>
+          <Table className={className?.table}>
             <TableHeaderContent
               table={table}
-              theadClassName={theadClassName}
-              trHeaderClassName={trHeaderClassName}
+              theadClassName={className?.thead}
+              trHeaderClassName={className?.trHeader}
             />
-            <TableBody className={tbodyClassName}>
+            <TableBody className={className?.tbody}>
               <TableBodyContent
                 table={table}
                 enableRowDrag={enableRowDrag}
                 enableRowAnimations={enableRowAnimations}
                 dataIds={dataIds}
-                tdClassName={tdClassName}
-                trClassName={trClassName}
+                tdClassName={className?.td}
+                trClassName={className?.tr}
               />
             </TableBody>
           </Table>
         </DndContext>
-        <Pagination table={table} className={paginationClassName} />
       </div>
+      <Pagination table={table} className={className?.pagination} />
     </div>
   )
 }
