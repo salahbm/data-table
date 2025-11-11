@@ -111,7 +111,7 @@ export default function Pagination<TData>({
         value={`${table.getState().pagination.pageSize}`}
         onValueChange={(val) => table.setPageSize(Number(val))}
       >
-        <SelectTrigger className='w-[180px]'>
+        <SelectTrigger className='w-fit'>
           <SelectValue placeholder='Select a fruit' />
         </SelectTrigger>
         <SelectContent>

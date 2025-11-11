@@ -1,18 +1,25 @@
 'use client'
 
 import { ColumnDef } from '@tanstack/react-table'
+
 import { DataTableColumnHeader } from '@/components/data-table/components/table-column-header'
+import { DragHandleCell } from '@/components/data-table/motions/drag-handle-cell'
 import { Badge } from '@/components/ui/badge'
 import { Product } from '@/lib/types'
 
 export const DEFAULT_COLUMNS: ColumnDef<Product>[] = [
   {
+    id: 'drag-handle',
+    header: () => <div className='w-5'></div>,
+    cell: ({ row }) => <DragHandleCell rowId={row.id} />,
+    size: 40,
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
     accessorKey: 'id',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='ID' />
-    ),
-    cell: ({ row }) => (
-      <div className='font-mono text-xs'>{row.getValue('id')}</div>
     ),
     enableSorting: true,
     size: 120,
@@ -21,9 +28,6 @@ export const DEFAULT_COLUMNS: ColumnDef<Product>[] = [
     accessorKey: 'name',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Name' />
-    ),
-    cell: ({ row }) => (
-      <div className='font-medium'>{row.getValue('name')}</div>
     ),
     enableSorting: true,
     size: 250,
@@ -44,7 +48,6 @@ export const DEFAULT_COLUMNS: ColumnDef<Product>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Brand' />
     ),
-    cell: ({ row }) => <div>{row.getValue('brand')}</div>,
     enableSorting: true,
     size: 130,
   },
@@ -118,7 +121,6 @@ export const DEFAULT_COLUMNS: ColumnDef<Product>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Color' />
     ),
-    cell: ({ row }) => <div>{row.getValue('color')}</div>,
     enableSorting: true,
     size: 100,
   },

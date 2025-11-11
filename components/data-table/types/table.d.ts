@@ -8,6 +8,10 @@ declare module '@tanstack/table-core' {
     includePaginationReset?: boolean
     includeResetSortings?: boolean
     includeDownload?: boolean
+    onDragEnd?: (event: DragEndEvent) => void
+    enableRowDrag?: boolean
+    enableRowAnimations?: boolean
+    stickyHeader?: boolean
   }
 }
 

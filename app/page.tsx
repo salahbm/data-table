@@ -1,3 +1,4 @@
+import { ISort } from '@/components/data-table'
 import { getProducts } from '@/lib/products'
 import { DefaultTable } from '@/views/default'
 
@@ -9,15 +10,13 @@ export default async function Home({
   // Get query parameters from URL
   const page = Number((await searchParams).page) || 1
   const pageSize = Number((await searchParams).pageSize) || 10
-  const sortBy = (await searchParams).sortBy as string | undefined
-  const sortOrder = ((await searchParams).sortOrder as 'asc' | 'desc') || 'asc'
+  const sort = (await searchParams).sort as ISort | undefined
 
   // Fetch data on the server
   const initialData = getProducts({
     page,
     pageSize,
-    sortBy,
-    sortOrder,
+    sort,
   })
 
   return <DefaultTable initialData={initialData} />

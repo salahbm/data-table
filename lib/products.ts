@@ -1,3 +1,5 @@
+import { ISort } from '@/components/data-table/types/table.types'
+
 function generateDummyProduct(index: number) {
   const categories = [
     'Electronics',
@@ -56,7 +58,7 @@ function generateDummyProduct(index: number) {
 }
 
 // Store all products in memory (simulating a database)
-let allProducts: ReturnType<typeof generateDummyProduct>[] = []
+const allProducts: ReturnType<typeof generateDummyProduct>[] = []
 
 // Initialize products on first call
 function initializeProducts(totalCount: number = 1000) {
@@ -82,27 +84,25 @@ export function generateProducts(count: number) {
 export function getProducts({
   page = 1,
   pageSize = 10,
-  sortBy,
-  sortOrder = 'asc',
+  sort,
 }: {
   page?: number
   pageSize?: number
-  sortBy?: string
-  sortOrder?: 'asc' | 'desc'
+  sort?: ISort
 } = {}) {
   // Initialize products if not already done
   initializeProducts()
 
-  let products = [...allProducts]
+  const products = [...allProducts]
 
   // Apply sorting if specified
-  if (sortBy) {
+  if (sort) {
     products.sort((a, b) => {
-      const aValue = a[sortBy as keyof typeof a]
-      const bValue = b[sortBy as keyof typeof b]
+      const aValue = a[sort.id as keyof typeof a]
+      const bValue = b[sort.id as keyof typeof b]
 
-      if (aValue < bValue) return sortOrder === 'asc' ? -1 : 1
-      if (aValue > bValue) return sortOrder === 'asc' ? 1 : -1
+      if (aValue < bValue) return sort.desc ? -1 : 1
+      if (aValue > bValue) return sort.desc ? 1 : -1
       return 0
     })
   }
