@@ -3,10 +3,10 @@ import { TableIcon } from '../icons'
 
 const Header: FC = () => {
   return (
-    <header className='flex items-center border-b border-neutral-200 bg-white px-6 py-4'>
+    <header className='flex items-center border-b border-border bg-background px-6 py-4'>
       <div className='flex items-center gap-3'>
         <TableIcon className='h-10 w-10' />
-        <span className='text-sm font-semibold uppercase tracking-[0.3em] text-neutral-600'>
+        <span className='text-sm font-semibold uppercase tracking-[0.3em] text-foreground'>
           Data Table
         </span>
       </div>

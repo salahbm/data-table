@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono, Poppins } from 'next/font/google'
-import { cn } from '@/lib/utils'
 import { Header } from '@/components/header'
+import { Sidebar } from '@/components/sidebar/sidebar-trigger'
+import { cn } from '@/lib/utils'
 import './globals.css'
 
 const geistSans = Geist({
@@ -34,14 +35,19 @@ export default function RootLayout({
     <html lang='en'>
       <body
         className={cn(
-          `${geistSans.variable} ${geistMono.variable} ${poppins.variable}`,
-          'antialiased'
+          'antialiased overflow-hidden',
+          geistSans.variable,
+          geistMono.variable,
+          poppins.variable
         )}
       >
-        <main className='min-h-screen relative w-dvw'>
+        <div className='h-screen w-screen flex flex-col overflow-hidden'>
           <Header />
-          {children}
-        </main>
+          <div className='flex flex-1 overflow-hidden'>
+            <Sidebar />
+            <main className='flex-1 overflow-auto p-6 lg:p-8'>{children}</main>
+          </div>
+        </div>
       </body>
     </html>
   )

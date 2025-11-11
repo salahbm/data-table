@@ -1,9 +1,10 @@
 'use client'
 
-import { FC, useEffect, useState } from 'react'
 import Link from 'next/link'
-import { cn } from '@/lib/utils'
+import { usePathname } from 'next/navigation'
+import { FC } from 'react'
 import routes from '@/constant/routes'
+import { cn } from '@/lib/utils'
 
 const isPathActive = (pathname: string | null, href: string) => {
   if (!pathname) return false
@@ -21,15 +22,22 @@ const SidebarContent: FC<{ isMinimized: boolean; toggle: () => void }> = ({
   isMinimized,
   toggle,
 }) => {
-  const [expanded, setExpanded] = useState<string[]>([])
+  const pathname = usePathname()
 
   const navItemClasses = (isActive: boolean) =>
     cn(
-      'flex items-center gap-2 rounded px-4 py-3 w-full cursor-pointer transition-colors truncate hover:bg-accent hover:text-sidebar-accent-foreground',
+      'flex items-center gap-2 rounded px-4 py-3 w-full cursor-pointer transition-colors truncate hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
       isActive
         ? 'bg-sidebar-primary/10 text-sidebar-primary font-medium hover:bg-sidebar-primary/20'
         : 'text-sidebar-foreground'
     )
+
+  const handleClick = () => {
+    // Only toggle on mobile (when sidebar is not minimized and screen is small)
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+      toggle()
+    }
+  }
 
   return (
     <nav
@@ -41,7 +49,7 @@ const SidebarContent: FC<{ isMinimized: boolean; toggle: () => void }> = ({
     >
       <div className='space-y-1'>
         {routes.map((item) => {
-          const isActive = isPathActive(window.location.pathname, item.href)
+          const isActive = isPathActive(pathname, item.href)
 
           return (
             <Link
@@ -52,7 +60,7 @@ const SidebarContent: FC<{ isMinimized: boolean; toggle: () => void }> = ({
                 isMinimized && 'justify-center px-2'
               )}
               aria-current={isActive ? 'page' : undefined}
-              onClick={toggle}
+              onClick={handleClick}
               title={item.label}
             >
               <item.icon className='size-5 text-current' />

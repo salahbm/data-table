@@ -1,10 +1,8 @@
 'use client'
 
 import { ChevronRight } from 'lucide-react'
-
-import { cn } from '@/lib/utils'
-
 import { Fragment, useState } from 'react'
+import { cn } from '@/lib/utils'
 import SidebarContent from './sidebar-content'
 
 function Sidebar() {
