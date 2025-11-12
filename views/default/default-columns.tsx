@@ -2,41 +2,25 @@
 
 import { ColumnDef } from '@tanstack/react-table'
 
-import { DataTableColumnHeader } from '@/components/data-table/components/table-column-header'
-import { DragHandleCell } from '@/components/data-table/motions/drag-handle-cell'
 import { Badge } from '@/components/ui/badge'
 import { Product } from '@/lib/types'
 
 export const DEFAULT_COLUMNS: ColumnDef<Product>[] = [
   {
-    id: 'drag-handle',
-    header: () => <div className='w-5'></div>,
-    cell: ({ row }) => <DragHandleCell rowId={row.id} />,
-    size: 40,
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
     accessorKey: 'id',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='ID' />
-    ),
+    header: 'ID',
     enableSorting: true,
     size: 120,
   },
   {
     accessorKey: 'name',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Name' />
-    ),
+    header: 'Name',
     enableSorting: true,
     size: 250,
   },
   {
     accessorKey: 'category',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Category' />
-    ),
+    header: 'Category',
     cell: ({ row }) => (
       <Badge variant='outline'>{row.getValue('category')}</Badge>
     ),
@@ -45,17 +29,13 @@ export const DEFAULT_COLUMNS: ColumnDef<Product>[] = [
   },
   {
     accessorKey: 'brand',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Brand' />
-    ),
+    header: 'Brand',
     enableSorting: true,
     size: 130,
   },
   {
     accessorKey: 'price',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Price' />
-    ),
+    header: 'Price',
     cell: ({ row }) => {
       const price = parseFloat(row.getValue('price'))
       const formatted = new Intl.NumberFormat('en-US', {
@@ -69,9 +49,7 @@ export const DEFAULT_COLUMNS: ColumnDef<Product>[] = [
   },
   {
     accessorKey: 'stock',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Stock' />
-    ),
+    header: 'Stock',
     cell: ({ row }) => {
       const stock = row.getValue('stock') as number
       return (
@@ -85,9 +63,7 @@ export const DEFAULT_COLUMNS: ColumnDef<Product>[] = [
   },
   {
     accessorKey: 'rating',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Rating' />
-    ),
+    header: 'Rating',
     cell: ({ row }) => {
       const rating = row.getValue('rating') as number
       return (
@@ -102,9 +78,7 @@ export const DEFAULT_COLUMNS: ColumnDef<Product>[] = [
   },
   {
     accessorKey: 'available',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Available' />
-    ),
+    header: 'Available',
     cell: ({ row }) => {
       const available = row.getValue('available') as boolean
       return (
@@ -118,17 +92,13 @@ export const DEFAULT_COLUMNS: ColumnDef<Product>[] = [
   },
   {
     accessorKey: 'color',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Color' />
-    ),
+    header: 'Color',
     enableSorting: true,
     size: 100,
   },
   {
     accessorKey: 'createdAt',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Created At' />
-    ),
+    header: 'Created At',
     cell: ({ row }) => {
       const date = new Date(row.getValue('createdAt'))
       return (

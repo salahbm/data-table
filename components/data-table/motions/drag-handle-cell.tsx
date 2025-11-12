@@ -1,7 +1,6 @@
 'use client'
 
 import { useSortable } from '@dnd-kit/sortable'
-import { GripVertical } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface DragHandleCellProps {
@@ -16,6 +15,7 @@ export function DragHandleCell({ rowId, className }: DragHandleCellProps) {
 
   return (
     <button
+      suppressHydrationWarning
       className={cn(
         'cursor-grab active:cursor-grabbing p-1 hover:bg-muted rounded transition-colors',
         isDragging && 'cursor-grabbing',
@@ -24,7 +24,25 @@ export function DragHandleCell({ rowId, className }: DragHandleCellProps) {
       {...attributes}
       {...listeners}
     >
-      <GripVertical className='size-4 text-muted-foreground' />
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        width='24'
+        height='24'
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='currentColor'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        className='size-4 text-muted-foreground'
+      >
+        <circle cx='9' cy='12' r='1' />
+        <circle cx='9' cy='5' r='1' />
+        <circle cx='9' cy='19' r='1' />
+        <circle cx='15' cy='12' r='1' />
+        <circle cx='15' cy='5' r='1' />
+        <circle cx='15' cy='19' r='1' />
+      </svg>
     </button>
   )
 }

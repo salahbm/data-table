@@ -45,11 +45,11 @@ export function DataTableResetSortings<TData>({
       if (table.options.onPaginationChange) {
         table.options.onPaginationChange({
           pageIndex: 0,
-          pageSize: 10,
+          pageSize: 50,
         })
       } else {
         table.setPageIndex(0)
-        table.setPageSize(10)
+        table.setPageSize(50)
       }
     }
   }
@@ -65,7 +65,7 @@ export function DataTableResetSortings<TData>({
     >
       <RotateCcw className='group-focus-within:animate-spin-once' />
       {isColumnSorted && (
-        <Dot className='absolute top-0 -right-1 size-6 -translate-y-1 animate-pulse text-red-500' />
+        <Dot className='absolute top-0 -right-1 size-6 -translate-y-1 animate-pulse text-accent' />
       )}
       Reset
     </Button>

@@ -1,5 +1,6 @@
 'use client'
 import { useQuery } from '@tanstack/react-query'
+import { Sheet } from 'lucide-react'
 import { parseAsInteger, parseAsJson, useQueryStates } from 'nuqs'
 import { useEffect, useEffectEvent, useState } from 'react'
 import {
@@ -8,6 +9,9 @@ import {
   normalizeDragEnd,
   useDataTable,
 } from '@/components/data-table'
+import { DataTableResetSortings } from '@/components/data-table/components/table-reset-sorting'
+import { DataTableViewOptions } from '@/components/data-table/components/table-view-options'
+import { Button } from '@/components/ui/button'
 import { getProducts } from '@/lib/products'
 import { Product } from '@/lib/types'
 import { DEFAULT_COLUMNS } from './default-columns'
@@ -77,23 +81,40 @@ export const DefaultTable = ({ initialData }: DefaultTableProps) => {
       },
     },
     meta: {
-      includeDownload: true,
       enableRowDrag: true,
       enableRowAnimations: true,
-      includeResetSortings: true,
       onDragEnd: (event) => setData(normalizeDragEnd(data, event)),
     },
   })
 
   return (
-    <DataTable
-      table={table}
-      className={{
-        container: '',
-        table:
-          'relative overflow-auto max-h-[calc(100vh-280px)] h-[calc(100vh-280px)]',
-        thead: 'bg-red-500',
-      }}
-    />
+    <div>
+      <div className='flex w-full items-center gap-2'>
+        <Button
+          size='sm'
+          role='button'
+          variant='ghost'
+          aria-label='Download CSV'
+          onClick={async () => alert('Download CSV is not implemented yet')}
+        >
+          <Sheet className='size-4' />
+          Download
+        </Button>
+
+        <DataTableViewOptions table={table} />
+
+        <DataTableResetSortings table={table} includePagination={true} />
+      </div>
+      <DataTable
+        table={table}
+        isLoading={!response.data}
+        className={{
+          wrapper: 'flex flex-col w-full',
+          container:
+            'relative overflow-y-auto max-h-[calc(100vh-280px)] [scrollbar-gutter:stable]',
+          table: 'border-collapse w-full text-sm',
+        }}
+      />
+    </div>
   )
 }

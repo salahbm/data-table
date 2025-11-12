@@ -12,20 +12,22 @@ export interface DataTableProps<TData> {
 
   // classNames
   className?: {
+    wrapper?: string
     container?: string
     table?: string
-    tbody?: string
+    // header classNames
     thead?: string
     trHeader?: string
-    td?: string
+    th?: string
+    // body classNames
+    tbody?: string
     tr?: string
+    td?: string
     pagination?: string
   }
 
   // form control
   form?: UseFormReturn<FieldValues>
-
-  children?: React.ReactNode
 }
 
 // ****************************************************************

@@ -7,17 +7,20 @@ import { CSSProperties } from 'react'
 import { cn } from '@/lib/utils'
 import { TableCell } from '../components/table-primitive'
 import { getCommonPinningStyles } from '../utils/pinned-columns'
+import { DragHandleCell } from './drag-handle-cell'
 
 interface DraggableRowProps<TData> {
   row: Row<TData>
   tdClassName?: string
   trClassName?: string
+  enableRowDrag?: boolean
 }
 
 export function DraggableRow<TData>({
   row,
   tdClassName,
   trClassName,
+  enableRowDrag,
 }: DraggableRowProps<TData>) {
   const { transform, transition, setNodeRef, isDragging } = useSortable({
     id: row.id,
@@ -33,14 +36,20 @@ export function DraggableRow<TData>({
 
   return (
     <tr
-      ref={setNodeRef}
       style={style}
+      ref={setNodeRef}
+      suppressHydrationWarning
       data-state={row.getIsSelected() && 'selected'}
       className={cn(
         'hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors',
         trClassName
       )}
     >
+      {enableRowDrag && (
+        <TableCell className={cn('w-10', tdClassName)}>
+          <DragHandleCell rowId={row.id} />
+        </TableCell>
+      )}
       {row.getVisibleCells().map((cell) => (
         <TableCell
           key={cell.id}

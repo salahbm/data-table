@@ -39,18 +39,13 @@ export function getCommonPinningStyles<TData>({
     right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
 
     // Make pinned columns slightly transparent
-    opacity: isPinned ? 0.95 : 1,
+    opacity: isPinned ? 0.99 : 1,
 
     // Use 'sticky' positioning for pinned columns so they stay in place when scrolling
     position: isPinned ? 'sticky' : 'relative',
 
-    // Set the background color to match the table background
-    background: isPinned ? 'var(--background)' : 'var(--background)',
-
     // Set the width of the column
     width: column.getSize(),
-
-    padding: '10px',
 
     // Make sure pinned columns appear above other content
     zIndex: isPinned ? 1 : 0,

@@ -9,7 +9,7 @@ export default async function Home({
 }) {
   // Get query parameters from URL
   const page = Number((await searchParams).page) || 1
-  const pageSize = Number((await searchParams).pageSize) || 10
+  const pageSize = Number((await searchParams).pageSize) || 50
   const sort = (await searchParams).sort as ISort | undefined
 
   // Fetch data on the server

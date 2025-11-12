@@ -63,6 +63,20 @@ function TableBodyContent<TData>({
     )
   }
 
+  if (enableRowDrag && enableRowAnimations) {
+    return (
+      <AnimatePresence mode='popLayout'>
+        <DraggableRows
+          rows={rows}
+          dataIds={dataIds}
+          tdClassName={tdClassName}
+          trClassName={trClassName}
+          enableRowDrag={enableRowDrag}
+        />
+      </AnimatePresence>
+    )
+  }
+
   if (enableRowDrag) {
     return (
       <DraggableRows
@@ -81,19 +95,6 @@ function TableBodyContent<TData>({
         tdClassName={tdClassName}
         trClassName={trClassName}
       />
-    )
-  }
-
-  if (enableRowDrag && enableRowAnimations) {
-    return (
-      <AnimatePresence mode='popLayout'>
-        <DraggableRows
-          rows={rows}
-          dataIds={dataIds}
-          tdClassName={tdClassName}
-          trClassName={trClassName}
-        />
-      </AnimatePresence>
     )
   }
 

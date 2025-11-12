@@ -10,11 +10,13 @@ function DraggableRows<TData>({
   dataIds,
   tdClassName,
   trClassName,
+  enableRowDrag,
 }: {
   rows: Row<TData>[]
   dataIds: UniqueIdentifier[]
   tdClassName?: string
   trClassName?: string
+  enableRowDrag?: boolean
 }) {
   return (
     <SortableContext items={dataIds} strategy={verticalListSortingStrategy}>
@@ -24,6 +26,7 @@ function DraggableRows<TData>({
           row={row}
           tdClassName={tdClassName}
           trClassName={trClassName}
+          enableRowDrag={enableRowDrag}
         />
       ))}
     </SortableContext>
