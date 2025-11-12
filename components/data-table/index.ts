@@ -1,4 +1,5 @@
 export * from './data-table'
 export * from './hook/use-data-table'
 export * from './types/table.types'
-export * from './utils/table-drag'
+export * from './utils/table-drag-end'
+export * from './utils/table-sorting'

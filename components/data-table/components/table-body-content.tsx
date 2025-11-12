@@ -3,31 +3,35 @@ import { type UniqueIdentifier } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { flexRender } from '@tanstack/react-table'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Fragment } from 'react'
+import { Fragment, useMemo } from 'react'
 import { cn } from '@/lib/utils'
-import AnimatedRows from '../motions/animated-row'
-import { DraggableRow } from '../motions/draggable-row'
+import AnimatedRows from '../motions/table-animated-row'
+import { DraggableRow } from '../motions/table-draggable-row'
 import { DataTableProps } from '../types/table.types'
-import { getCommonPinningStyles } from '../utils/pinned-columns'
+import { getCommonPinningStyles } from '../utils/table-pinned-columns'
 import { TableCell, TableRow } from './table-primitive'
 
 function TableBodyContent<TData>({
   table,
   enableRowDrag,
   enableRowAnimations,
-  dataIds,
-  tdClassName,
-  trClassName,
+  className,
 }: {
   table: DataTableProps<TData>['table']
   enableRowDrag: boolean
   enableRowAnimations: boolean
-  dataIds: UniqueIdentifier[]
-  tdClassName?: string
-  trClassName?: string
+  className?: {
+    td?: string
+    tr?: string
+  }
 }) {
   const rows = table.getRowModel().rows
   const hasRows = rows?.length > 0
+
+  const dataIds = useMemo<UniqueIdentifier[]>(
+    () => rows.map((row) => row.id), // Match to your trackable value name
+    [rows]
+  )
 
   if (!hasRows) {
     return enableRowAnimations ? (
@@ -36,7 +40,7 @@ function TableBodyContent<TData>({
           key='no-data'
           className={cn(
             'hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors',
-            trClassName
+            className?.tr
           )}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -52,7 +56,7 @@ function TableBodyContent<TData>({
         </motion.tr>
       </AnimatePresence>
     ) : (
-      <TableRow className={trClassName}>
+      <TableRow className={className?.tr}>
         <TableCell
           colSpan={table.getAllColumns().length}
           className='h-48 text-center'
@@ -63,33 +67,14 @@ function TableBodyContent<TData>({
     )
   }
 
-  // if (enableRowDrag && enableRowAnimations) {
-  //   return (
-  //     <AnimatePresence mode='popLayout'>
-  //       <SortableContext items={dataIds} strategy={verticalListSortingStrategy}>
-  //         {rows.map((row) => (
-  //           <DraggableRow
-  //             key={row.id}
-  //             row={row}
-  //             tdClassName={tdClassName}
-  //             trClassName={trClassName}
-  //             enableRowDrag={enableRowDrag}
-  //           />
-  //         ))}
-  //       </SortableContext>
-  //     </AnimatePresence>
-  //   )
-  // }
-
   if (enableRowDrag) {
     return (
       <SortableContext items={dataIds} strategy={verticalListSortingStrategy}>
         {rows.map((row) => (
           <DraggableRow
-            key={row.id}
             row={row}
-            tdClassName={tdClassName}
-            trClassName={trClassName}
+            key={row.id}
+            className={className}
             enableRowDrag={enableRowDrag}
           />
         ))}
@@ -98,13 +83,7 @@ function TableBodyContent<TData>({
   }
 
   if (enableRowAnimations) {
-    return (
-      <AnimatedRows
-        rows={rows}
-        tdClassName={tdClassName}
-        trClassName={trClassName}
-      />
-    )
+    return <AnimatedRows rows={rows} className={className} />
   }
 
   return (
@@ -113,12 +92,12 @@ function TableBodyContent<TData>({
         <TableRow
           key={row.id}
           data-state={row.getIsSelected() && 'selected'}
-          className={trClassName}
+          className={className?.tr}
         >
           {row.getVisibleCells().map((cell) => (
             <TableCell
               key={cell.id}
-              className={tdClassName}
+              className={className?.td}
               style={getCommonPinningStyles({ column: cell.column })}
             >
               {flexRender(cell.column.columnDef.cell, cell.getContext())}

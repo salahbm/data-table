@@ -25,8 +25,6 @@ const SIZE_KEY = 'size'
 const SORT_KEY = 'sort'
 const DEBOUNCE_MS = 300
 const THROTTLE_MS = 50
-export const DEFAULT_SORT: ISort[] = [{ id: 'createdAt', desc: false }]
-export const SORT_VALIDATOR = (val: unknown) => val as ISort[]
 
 export function useDataTable<TData>(props: UseDataTableProps<TData>) {
   const {

@@ -3,15 +3,17 @@ import { flexRender, type Row } from '@tanstack/react-table'
 import { AnimatePresence, motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { TableCell } from '../components/table-primitive'
-import { getCommonPinningStyles } from '../utils/pinned-columns'
+import { getCommonPinningStyles } from '../utils/table-pinned-columns'
 
 function AnimatedRows<TData>({
   rows,
-  tdClassName,
-  trClassName,
+  className,
 }: {
   rows: Row<TData>[]
-  tdClassName?: string
+  className?: {
+    td?: string
+    tr?: string
+  }
   trClassName?: string
 }) {
   return (
@@ -22,7 +24,7 @@ function AnimatedRows<TData>({
           data-state={row.getIsSelected() && 'selected'}
           className={cn(
             'hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors',
-            trClassName
+            className?.tr
           )}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -36,7 +38,7 @@ function AnimatedRows<TData>({
           {row.getVisibleCells().map((cell) => (
             <TableCell
               key={cell.id}
-              className={tdClassName}
+              className={className?.td}
               style={getCommonPinningStyles({ column: cell.column })}
             >
               {flexRender(cell.column.columnDef.cell, cell.getContext())}

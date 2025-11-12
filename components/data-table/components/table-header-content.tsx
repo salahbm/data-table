@@ -11,7 +11,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
-import { getCommonPinningStyles } from '../utils/pinned-columns'
+import { getCommonPinningStyles } from '../utils/table-pinned-columns'
 import { TableHead, TableRow } from './table-primitive'
 
 type TableHeaderContentProps<TData> = {

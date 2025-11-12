@@ -2,6 +2,7 @@
 import { createParser } from 'nuqs/server'
 // This imports a function to create URL query parsers
 import { z } from 'zod'
+import { ISort } from '../types/table.types'
 
 // This imports Zod, a validation library
 
@@ -11,6 +12,9 @@ const sortingItemSchema = z.object({
   id: z.string(), // The column ID that's being sorted
   desc: z.boolean(), // Whether the sort is descending (true) or ascending (false)
 })
+
+export const DEFAULT_SORT: ISort[] = [{ id: 'createdAt', desc: false }]
+export const SORT_VALIDATOR = (val: unknown) => val as ISort[]
 
 // This function creates a parser for sorting state from URL query parameters
 export const getSortingStateParser = (columnIds?: string[] | Set<string>) => {

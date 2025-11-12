@@ -12,7 +12,7 @@ import {
   useSensors,
 } from '@dnd-kit/core'
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 
 interface DndWrapperProps {
   children: React.ReactNode
@@ -40,12 +40,12 @@ export function DndWrapper({
 
   // If drag is not enabled, just render children
   if (!enableRowDrag) {
-    return <>{children}</>
+    return <Fragment>{children}</Fragment>
   }
 
   // Wait for client-side mount to avoid hydration mismatch
   if (!mounted) {
-    return <>{children}</>
+    return <Fragment>{children}</Fragment>
   }
 
   return (

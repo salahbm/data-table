@@ -38,7 +38,6 @@ export const DefaultTable = ({ initialData }: DefaultTableProps) => {
     size: parseAsInteger.withDefault(50),
     sort: parseAsJson(SORT_VALIDATOR).withDefault(DEFAULT_SORT),
   })
-  console.log(`STRINGIFIED 👉:`, JSON.stringify(params.sort, null, 2))
 
   const response = useQuery({
     queryKey: [

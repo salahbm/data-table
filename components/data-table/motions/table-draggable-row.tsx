@@ -6,20 +6,21 @@ import { flexRender, Row } from '@tanstack/react-table'
 import { CSSProperties } from 'react'
 import { cn } from '@/lib/utils'
 import { TableCell } from '../components/table-primitive'
-import { getCommonPinningStyles } from '../utils/pinned-columns'
-import { DragHandleCell } from './drag-handle-cell'
+import { getCommonPinningStyles } from '../utils/table-pinned-columns'
+import { DragHandleCell } from './table-drag-cell'
 
 interface DraggableRowProps<TData> {
   row: Row<TData>
-  tdClassName?: string
-  trClassName?: string
+  className?: {
+    td?: string
+    tr?: string
+  }
   enableRowDrag?: boolean
 }
 
 export function DraggableRow<TData>({
   row,
-  tdClassName,
-  trClassName,
+  className,
   enableRowDrag,
 }: DraggableRowProps<TData>) {
   const { transform, transition, setNodeRef, isDragging } = useSortable({
@@ -42,18 +43,18 @@ export function DraggableRow<TData>({
       data-state={row.getIsSelected() && 'selected'}
       className={cn(
         'hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors',
-        trClassName
+        className?.tr
       )}
     >
       {enableRowDrag && (
-        <TableCell className={cn('w-10', tdClassName)}>
+        <TableCell className={cn('w-10', className?.td)}>
           <DragHandleCell rowId={row.id} />
         </TableCell>
       )}
       {row.getVisibleCells().map((cell) => (
         <TableCell
           key={cell.id}
-          className={tdClassName}
+          className={className?.td}
           style={{
             ...getCommonPinningStyles({ column: cell.column }),
           }}
