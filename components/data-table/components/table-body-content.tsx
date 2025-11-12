@@ -1,12 +1,12 @@
 'use client'
 import { type UniqueIdentifier } from '@dnd-kit/core'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { flexRender } from '@tanstack/react-table'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Fragment } from 'react'
-
 import { cn } from '@/lib/utils'
 import AnimatedRows from '../motions/animated-row'
-import DraggableRows from '../motions/draggable-rows'
+import { DraggableRow } from '../motions/draggable-row'
 import { DataTableProps } from '../types/table.types'
 import { getCommonPinningStyles } from '../utils/pinned-columns'
 import { TableCell, TableRow } from './table-primitive'
@@ -63,28 +63,37 @@ function TableBodyContent<TData>({
     )
   }
 
-  if (enableRowDrag && enableRowAnimations) {
-    return (
-      <AnimatePresence mode='popLayout'>
-        <DraggableRows
-          rows={rows}
-          dataIds={dataIds}
-          tdClassName={tdClassName}
-          trClassName={trClassName}
-          enableRowDrag={enableRowDrag}
-        />
-      </AnimatePresence>
-    )
-  }
+  // if (enableRowDrag && enableRowAnimations) {
+  //   return (
+  //     <AnimatePresence mode='popLayout'>
+  //       <SortableContext items={dataIds} strategy={verticalListSortingStrategy}>
+  //         {rows.map((row) => (
+  //           <DraggableRow
+  //             key={row.id}
+  //             row={row}
+  //             tdClassName={tdClassName}
+  //             trClassName={trClassName}
+  //             enableRowDrag={enableRowDrag}
+  //           />
+  //         ))}
+  //       </SortableContext>
+  //     </AnimatePresence>
+  //   )
+  // }
 
   if (enableRowDrag) {
     return (
-      <DraggableRows
-        rows={rows}
-        dataIds={dataIds}
-        tdClassName={tdClassName}
-        trClassName={trClassName}
-      />
+      <SortableContext items={dataIds} strategy={verticalListSortingStrategy}>
+        {rows.map((row) => (
+          <DraggableRow
+            key={row.id}
+            row={row}
+            tdClassName={tdClassName}
+            trClassName={trClassName}
+            enableRowDrag={enableRowDrag}
+          />
+        ))}
+      </SortableContext>
     )
   }
 

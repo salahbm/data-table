@@ -5,8 +5,9 @@ import { parseAsInteger, parseAsJson, useQueryStates } from 'nuqs'
 import { useEffect, useEffectEvent, useState } from 'react'
 import {
   DataTable,
-  ISort,
+  DEFAULT_SORT,
   normalizeDragEnd,
+  SORT_VALIDATOR,
   useDataTable,
 } from '@/components/data-table'
 import { DataTableResetSortings } from '@/components/data-table/components/table-reset-sorting'
@@ -32,19 +33,12 @@ interface DefaultTableProps {
 
 export const DefaultTable = ({ initialData }: DefaultTableProps) => {
   const [data, setData] = useState<Product[]>(initialData.data)
-  const [params] = useQueryStates(
-    {
-      page: parseAsInteger.withDefault(1),
-      size: parseAsInteger.withDefault(50),
-      sort: parseAsJson<ISort>((value) => value as ISort).withDefault({
-        id: 'createdAt',
-        desc: false,
-      }),
-    },
-    {
-      history: 'replace',
-    }
-  )
+  const [params] = useQueryStates({
+    page: parseAsInteger.withDefault(1),
+    size: parseAsInteger.withDefault(50),
+    sort: parseAsJson(SORT_VALIDATOR).withDefault(DEFAULT_SORT),
+  })
+  console.log(`STRINGIFIED 👉:`, JSON.stringify(params.sort, null, 2))
 
   const response = useQuery({
     queryKey: [
@@ -58,7 +52,6 @@ export const DefaultTable = ({ initialData }: DefaultTableProps) => {
         sort: params.sort,
       }),
     initialData: initialData,
-    staleTime: 0,
   })
 
   const handleSyncData = useEffectEvent((data: Product[]) => setData(data))
@@ -81,7 +74,7 @@ export const DefaultTable = ({ initialData }: DefaultTableProps) => {
       },
     },
     meta: {
-      enableRowDrag: true,
+      enableRowDrag: false,
       enableRowAnimations: true,
       onDragEnd: (event) => setData(normalizeDragEnd(data, event)),
     },
@@ -103,7 +96,7 @@ export const DefaultTable = ({ initialData }: DefaultTableProps) => {
 
         <DataTableViewOptions table={table} />
 
-        <DataTableResetSortings table={table} includePagination={true} />
+        <DataTableResetSortings table={table} includePagination={false} />
       </div>
       <DataTable
         table={table}

@@ -15,7 +15,7 @@ function AnimatedRows<TData>({
   trClassName?: string
 }) {
   return (
-    <AnimatePresence mode='wait'>
+    <AnimatePresence mode='popLayout'>
       {rows.map((row, idx) => (
         <motion.tr
           key={row.id}

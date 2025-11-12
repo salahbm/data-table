@@ -26,14 +26,19 @@ declare module '@tanstack/react-table' {
   interface ColumnMeta<TData> {
     form?: UseFormReturn<TData, unknown, undefined>
     /**
-     * @default false
-     * @description if turned on, the cell will have tooltip
-     */
-    tooltip?: boolean | TData
-    /**
      * @default undefined
      * @description the label of the column for hide/show columns
      */
     label?: string
+    /**
+     * @default false
+     * @description if turned on, the column will be sortable
+     */
+    enableSorting?: boolean
+    /**
+     * @default false
+     * @description if turned on, the column will be hideable
+     */
+    enableHiding?: boolean
   }
 }

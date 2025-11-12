@@ -88,21 +88,22 @@ export function getProducts({
 }: {
   page?: number
   pageSize?: number
-  sort?: ISort
+  sort?: ISort[]
 } = {}) {
+  console.log(`🚀 ~ sort:`, sort)
   // Initialize products if not already done
   initializeProducts()
 
   const products = [...allProducts]
 
   // Apply sorting if specified
-  if (sort) {
+  if (sort?.length) {
     products.sort((a, b) => {
-      const aValue = a[sort.id as keyof typeof a]
-      const bValue = b[sort.id as keyof typeof b]
+      const aValue = a[sort[0].id as keyof typeof a]
+      const bValue = b[sort[0].id as keyof typeof b]
 
-      if (aValue < bValue) return sort.desc ? -1 : 1
-      if (aValue > bValue) return sort.desc ? 1 : -1
+      if (aValue < bValue) return sort[0].desc ? -1 : 1
+      if (aValue > bValue) return sort[0].desc ? 1 : -1
       return 0
     })
   }

@@ -36,8 +36,8 @@ export function DraggableRow<TData>({
 
   return (
     <tr
-      style={style}
       ref={setNodeRef}
+      style={style}
       suppressHydrationWarning
       data-state={row.getIsSelected() && 'selected'}
       className={cn(

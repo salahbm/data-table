@@ -9,14 +9,19 @@ export const DEFAULT_COLUMNS: ColumnDef<Product>[] = [
   {
     accessorKey: 'id',
     header: 'ID',
-    enableSorting: true,
     size: 120,
+    meta: {
+      enableHiding: true,
+      enableSorting: true,
+    },
   },
   {
     accessorKey: 'name',
     header: 'Name',
-    enableSorting: true,
     size: 250,
+    meta: {
+      enableSorting: true,
+    },
   },
   {
     accessorKey: 'category',
@@ -24,13 +29,11 @@ export const DEFAULT_COLUMNS: ColumnDef<Product>[] = [
     cell: ({ row }) => (
       <Badge variant='outline'>{row.getValue('category')}</Badge>
     ),
-    enableSorting: true,
     size: 150,
   },
   {
     accessorKey: 'brand',
     header: 'Brand',
-    enableSorting: true,
     size: 130,
   },
   {
@@ -44,7 +47,6 @@ export const DEFAULT_COLUMNS: ColumnDef<Product>[] = [
       }).format(price)
       return <div className='font-medium'>{formatted}</div>
     },
-    enableSorting: true,
     size: 120,
   },
   {
@@ -58,7 +60,6 @@ export const DEFAULT_COLUMNS: ColumnDef<Product>[] = [
         </div>
       )
     },
-    enableSorting: true,
     size: 100,
   },
   {
@@ -73,7 +74,6 @@ export const DEFAULT_COLUMNS: ColumnDef<Product>[] = [
         </div>
       )
     },
-    enableSorting: true,
     size: 100,
   },
   {
@@ -87,13 +87,11 @@ export const DEFAULT_COLUMNS: ColumnDef<Product>[] = [
         </Badge>
       )
     },
-    enableSorting: true,
     size: 100,
   },
   {
     accessorKey: 'color',
     header: 'Color',
-    enableSorting: true,
     size: 100,
   },
   {
@@ -111,7 +109,6 @@ export const DEFAULT_COLUMNS: ColumnDef<Product>[] = [
         </div>
       )
     },
-    enableSorting: true,
     size: 130,
   },
 ]
