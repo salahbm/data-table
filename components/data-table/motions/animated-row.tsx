@@ -2,7 +2,7 @@
 import { flexRender, type Row } from '@tanstack/react-table'
 import { AnimatePresence, motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
-import { TableCell } from '../components/table-ui'
+import { TableCell } from '../components/table-primitive'
 import { getCommonPinningStyles } from '../utils/pinned-columns'
 
 function AnimatedRows<TData>({

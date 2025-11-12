@@ -1,7 +1,7 @@
 import { DragEndEvent } from '@dnd-kit/core'
 import { arrayMove } from '@dnd-kit/sortable'
 
-export const mapTableDragEnd = <T>(
+export const normalizeDragEnd = <T>(
   prev: T[] | undefined,
   event: DragEndEvent,
   targetValue?: keyof T | string

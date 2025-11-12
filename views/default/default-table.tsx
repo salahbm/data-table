@@ -1,7 +1,13 @@
 'use client'
 import { useQuery } from '@tanstack/react-query'
 import { parseAsInteger, parseAsJson, useQueryStates } from 'nuqs'
-import { DataTable, ISort, useDataTable } from '@/components/data-table'
+import { useEffect, useEffectEvent, useState } from 'react'
+import {
+  DataTable,
+  ISort,
+  normalizeDragEnd,
+  useDataTable,
+} from '@/components/data-table'
 import { getProducts } from '@/lib/products'
 import { Product } from '@/lib/types'
 import { DEFAULT_COLUMNS } from './default-columns'
@@ -21,6 +27,7 @@ interface DefaultTableProps {
 }
 
 export const DefaultTable = ({ initialData }: DefaultTableProps) => {
+  const [data, setData] = useState<Product[]>(initialData.data)
   const [params] = useQueryStates(
     {
       page: parseAsInteger.withDefault(1),
@@ -50,8 +57,14 @@ export const DefaultTable = ({ initialData }: DefaultTableProps) => {
     staleTime: 0,
   })
 
+  const handleSyncData = useEffectEvent((data: Product[]) => setData(data))
+
+  useEffect(() => {
+    handleSyncData(response.data.data)
+  }, [response.data])
+
   const { table } = useDataTable<Product>({
-    data: response.data.data,
+    data: data,
     columns: DEFAULT_COLUMNS,
     pageCount: response.data.meta.totalPages,
     getRowId: (originalRow) => originalRow.id,
@@ -64,10 +77,11 @@ export const DefaultTable = ({ initialData }: DefaultTableProps) => {
       },
     },
     meta: {
-      includeDownload: false,
-      enableRowDrag: false,
-      enableRowAnimations: false,
-      includeResetSortings: false,
+      includeDownload: true,
+      enableRowDrag: true,
+      enableRowAnimations: true,
+      includeResetSortings: true,
+      onDragEnd: (event) => setData(normalizeDragEnd(data, event)),
     },
   })
 
@@ -75,7 +89,10 @@ export const DefaultTable = ({ initialData }: DefaultTableProps) => {
     <DataTable
       table={table}
       className={{
-        container: 'relative overflow-auto max-h-[calc(100vh-280px)]',
+        container: '',
+        table:
+          'relative overflow-auto max-h-[calc(100vh-280px)] h-[calc(100vh-280px)]',
+        thead: 'bg-red-500',
       }}
     />
   )

@@ -5,7 +5,7 @@ import { CSS } from '@dnd-kit/utilities'
 import { flexRender, Row } from '@tanstack/react-table'
 import { CSSProperties } from 'react'
 import { cn } from '@/lib/utils'
-import { TableCell } from '../components/table-ui'
+import { TableCell } from '../components/table-primitive'
 import { getCommonPinningStyles } from '../utils/pinned-columns'
 
 interface DraggableRowProps<TData> {
