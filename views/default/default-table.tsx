@@ -81,12 +81,12 @@ export const DefaultTable = ({ initialData }: DefaultTableProps) => {
   })
 
   return (
-    <div className='h-dvh overflow-hidden'>
+    <div className='h-fit overflow-hidden'>
       <DataTable
         table={table}
         isLoading={response.isLoading}
         className={{
-          container: 'relative h-screen overflow-y-auto',
+          container: 'relative h-[calc(100vh-18rem)] overflow-y-auto',
         }}
       />
     </div>
