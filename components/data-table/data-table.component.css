@@ -1,0 +1,70 @@
+.data-table {
+  /* Table Container */
+  --table-width: 100%;
+  --table-text-size: 0.875rem; /* 14px */
+  --table-border-collapse: collapse;
+
+  /* Table Header */
+  --table-header-height: 3rem; /* 48px */
+  --table-header-bg: "#454545";
+  --table-header-color: "#ffffff";
+  --table-header-font-weight: 500;
+  --table-header-padding: 0.5rem; /* 8px */
+  --table-header-text-align: center;
+
+  /* Table Row */
+  --table-row-height: auto;
+  --table-row-border-bottom: 1px solid "#454545";
+  --table-row-hover-bg: "#454545";
+  --table-row-selected-bg: "#454545";
+  --table-row-transition: background-color 0.2s, color 0.2s;
+
+  /* Table Cell */
+  --table-cell-padding: 0.5rem; /* 8px */
+  --table-cell-text-align: center;
+  --table-cell-vertical-align: middle;
+  --table-cell-whitespace: nowrap;
+
+  /* Pagination */
+  --pagination-padding-top: 1.25rem; /* 20px */
+  --pagination-padding-bottom: 1.5rem; /* 24px */
+  --pagination-button-size: 1.5rem; /* 24px */
+  --pagination-button-border-radius: 0.25rem; /* 4px */
+  --pagination-gap: 0.5rem; /* 8px */
+
+  /* Pinned Columns */
+  --pinned-column-bg: hsl(var(--background));
+  --pinned-column-z-index: 1;
+  --pinned-header-z-index: 11;
+
+  /* Animation */
+  --animation-duration: 0.15s;
+  --animation-delay-multiplier: 0.02s;
+  --animation-ease: ease-out;
+}
+
+/* ============================================
+   SCROLLBAR CUSTOMIZATION
+   ============================================ */
+
+.no-border-scrollbar::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.no-border-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+}
+
+.no-border-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.25);
+  background-clip: padding-box;
+  border: 3px solid transparent;
+  border-radius: 8px;
+}
+
+.no-border-scrollbar::-webkit-scrollbar-corner {
+  background: transparent;
+}

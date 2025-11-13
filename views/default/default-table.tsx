@@ -99,12 +99,9 @@ export const DefaultTable = ({ initialData }: DefaultTableProps) => {
       </div>
       <DataTable
         table={table}
-        isLoading={!response.data}
+        isLoading={response.isLoading}
         className={{
-          wrapper: 'flex flex-col w-full',
-          container:
-            'relative overflow-y-auto max-h-[calc(100vh-280px)] [scrollbar-gutter:stable]',
-          table: 'border-collapse w-full text-sm',
+          container: 'relative  max-h-[calc(100vh-280px)] overflow-y-auto',
         }}
       />
     </div>

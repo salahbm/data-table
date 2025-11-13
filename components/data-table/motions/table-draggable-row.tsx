@@ -41,8 +41,10 @@ export function DraggableRow<TData>({
       style={style}
       suppressHydrationWarning
       data-state={row.getIsSelected() && 'selected'}
+      data-dragging={isDragging}
+      data-slot='table-row'
       className={cn(
-        'hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors',
+        'border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted',
         className?.tr
       )}
     >
@@ -54,10 +56,9 @@ export function DraggableRow<TData>({
       {row.getVisibleCells().map((cell) => (
         <TableCell
           key={cell.id}
+          data-pinned={cell.column.getIsPinned() || undefined}
           className={className?.td}
-          style={{
-            ...getCommonPinningStyles({ column: cell.column }),
-          }}
+          style={getCommonPinningStyles({ column: cell.column })}
         >
           {flexRender(cell.column.columnDef.cell, cell.getContext())}
         </TableCell>

@@ -67,12 +67,7 @@ export const DEFAULT_COLUMNS: ColumnDef<Product>[] = [
     header: 'Rating',
     cell: ({ row }) => {
       const rating = row.getValue('rating') as number
-      return (
-        <div className='flex items-center gap-1'>
-          <span>⭐</span>
-          <span>{rating.toFixed(1)}</span>
-        </div>
-      )
+      return <span>{rating.toFixed(1)}</span>
     },
     size: 100,
   },
@@ -82,7 +77,7 @@ export const DEFAULT_COLUMNS: ColumnDef<Product>[] = [
     cell: ({ row }) => {
       const available = row.getValue('available') as boolean
       return (
-        <Badge variant={available ? 'default' : 'secondary'}>
+        <Badge variant={available ? 'default' : 'destructive'}>
           {available ? 'Yes' : 'No'}
         </Badge>
       )

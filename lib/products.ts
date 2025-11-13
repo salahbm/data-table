@@ -36,7 +36,7 @@ function generateDummyProduct(index: number) {
   ).toISOString() // Last year
 
   return {
-    id: `prod-${index}`,
+    id: `P${index}`,
     name: `${brand} ${category.slice(0, -1)} Gadget ${index}`,
     description: `A high-quality ${color} ${category} item from ${brand}.`,
     category: category,

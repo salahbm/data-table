@@ -8,6 +8,7 @@ import { Table, TableBody, TableHeader } from './components/table-primitive'
 import { DataTableSkeleton } from './components/table-skeleton'
 import { DndWrapper } from './motions/table-dnd-wrapper'
 import { DataTableProps } from './types/table.types'
+import './data-table.component.css'
 
 export function DataTable<TData>({
   table,
@@ -22,12 +23,15 @@ export function DataTable<TData>({
     return <DataTableSkeleton columnCount={table.getAllColumns().length} />
 
   return (
-    <section className={className?.wrapper}>
+    <section className={cn('data-table', className?.wrapper)}>
       <DndWrapper
         enableRowDrag={enableRowDrag}
         onDragEnd={table.options.meta?.onDragEnd}
       >
-        <div className={className?.container} data-slot='table-container'>
+        <div
+          className={cn('no-border-scrollbar', className?.container)}
+          data-slot='table-container'
+        >
           <Table className={className?.table}>
             <TableHeader className={cn('sticky top-0 z-2', className?.thead)}>
               <TableHeaderContent
