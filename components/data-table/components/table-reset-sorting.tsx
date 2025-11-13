@@ -58,14 +58,13 @@ export function DataTableResetSortings<TData>({
     <Button
       aria-label='Reset Sortings'
       role='button'
-      variant='ghost'
-      size='sm'
+      variant='outline'
       className='group relative'
       onClick={resetSortings}
     >
       <RotateCcw className='group-focus-within:animate-spin-once' />
       {isColumnSorted && (
-        <Dot className='absolute top-0 -right-1 size-6 -translate-y-1 animate-pulse text-accent' />
+        <Dot className='absolute top-0 -right-1 size-6 -translate-y-1 animate-pulse text-red-500' />
       )}
       Reset
     </Button>

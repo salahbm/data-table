@@ -1,39 +1,41 @@
 .data-table {
-  /* Table Container */
-  --table-width: 100%;
-  --table-text-size: 0.875rem; /* 14px */
-  --table-border-collapse: collapse;
 
   /* Table Header */
-  --table-header-height: 3rem; /* 48px */
-  --table-header-bg: "#454545";
-  --table-header-color: "#ffffff";
-  --table-header-font-weight: 500;
-  --table-header-padding: 0.5rem; /* 8px */
+  --table-header-height: 44px;
+  --table-header-bg: #F8F9FA;
+  --table-header-padding: 12px 8px;
+  --table-header-radius: 4px;
+  --table-header-whitespace: nowrap;
   --table-header-text-align: center;
+  --table-header-text-vertical-align: middle;
+  --table-header-text-color: #282843;
+  --table-header-text-size: 14px;
+  --table-header-font: 500;
 
   /* Table Row */
-  --table-row-height: auto;
-  --table-row-border-bottom: 1px solid "#454545";
-  --table-row-hover-bg: "#454545";
-  --table-row-selected-bg: "#454545";
+  --table-row-border-bottom: 1px solid #E9ECEF;
+  --table-row-hover-bg: #F8F9FA;
+  --table-row-selected-bg: #e9ecef;
   --table-row-transition: background-color 0.2s, color 0.2s;
 
   /* Table Cell */
-  --table-cell-padding: 0.5rem; /* 8px */
+  --table-cell-padding: 18px 8px;
   --table-cell-text-align: center;
   --table-cell-vertical-align: middle;
   --table-cell-whitespace: nowrap;
+  --table-cell-text-color: #282843;
+  --table-cell-text-size: 16px;
+  --table-cell-font: 400;
 
   /* Pagination */
-  --pagination-padding-top: 1.25rem; /* 20px */
-  --pagination-padding-bottom: 1.5rem; /* 24px */
-  --pagination-button-size: 1.5rem; /* 24px */
-  --pagination-button-border-radius: 0.25rem; /* 4px */
-  --pagination-gap: 0.5rem; /* 8px */
+  --pagination-padding-top: 20px;
+  --pagination-padding-bottom: 24px;
+  --pagination-button-size: 24px;
+  --pagination-button-border-radius: 4px;
+  --pagination-gap: 8px;
 
   /* Pinned Columns */
-  --pinned-column-bg: hsl(var(--background));
+  --pinned-column-bg: #F8F9FA;
   --pinned-column-z-index: 1;
   --pinned-header-z-index: 11;
 
@@ -41,6 +43,63 @@
   --animation-duration: 0.15s;
   --animation-delay-multiplier: 0.02s;
   --animation-ease: ease-out;
+
+}
+
+
+/* ============================================
+   TABLE PRIMITIVE
+   ============================================ */
+
+.data-table .data-table-row {
+  border-bottom: var(--table-row-border-bottom);
+  transition: var(--table-row-transition);
+
+  &:hover {
+    background-color: var(--table-row-hover-bg);
+  }
+
+  &[data-state='selected'] {
+    background-color: var(--table-row-selected-bg);
+  }
+
+  &:has(.data-table-head) {
+    border-bottom: none;
+  }
+
+
+}
+
+.data-table .data-table-head {
+  height: var(--table-header-height);
+  background-color: var(--table-header-bg);
+  padding: var(--table-header-padding);
+  align-items: var(--table-header-vertical-align);
+  font-weight: var(--table-header-font);
+  white-space: var(--table-header-whitespace);
+  color: var(--table-header-text-color);
+  text-align: var(--table-header-text-align);
+  font-size: var(--table-header-text-size);
+
+  &:first-child {
+    border-top-left-radius: var(--table-header-radius);
+    border-bottom-left-radius: var(--table-header-radius);
+  }
+  
+  &:last-child {
+    border-top-right-radius: var(--table-header-radius);
+    border-bottom-right-radius: var(--table-header-radius);
+  }  
+}
+
+.data-table .data-table-cell {
+  padding: var(--table-cell-padding);
+  text-align: var(--table-cell-text-align);
+  vertical-align: var(--table-cell-vertical-align);
+  white-space: var(--table-cell-whitespace);
+  color: var(--table-cell-text-color);
+  font-size: var(--table-cell-text-size);
+  font-weight: var(--table-cell-font);
 }
 
 /* ============================================
@@ -58,13 +117,39 @@
   border: none;
 }
 
-.no-border-scrollbar::-webkit-scrollbar-thumb {
+ .no-border-scrollbar::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.25);
   background-clip: padding-box;
   border: 3px solid transparent;
   border-radius: 8px;
 }
 
-.no-border-scrollbar::-webkit-scrollbar-corner {
+ .no-border-scrollbar::-webkit-scrollbar-corner {
   background: transparent;
+}
+
+
+
+/* ============================================
+   TABLE ACTION BUTTONS
+   ============================================ */
+
+.data-table-action-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: var(--action-button-padding);
+  gap: var(--action-button-gap);
+  border-radius: var(--action-button-radius);
+  border: var(--action-button-border);
+  background: var(--action-button-bg);
+
+
+&:hover {
+  background: var(--action-button-hover-bg);
+}
+
+&:active {
+  background: var(--action-button-active-bg);
+}
 }

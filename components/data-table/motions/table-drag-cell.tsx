@@ -17,7 +17,7 @@ export function DragHandleCell({ rowId, className }: DragHandleCellProps) {
     <button
       suppressHydrationWarning
       className={cn(
-        'cursor-grab active:cursor-grabbing p-1 hover:bg-muted rounded transition-colors',
+        'cursor-grab active:cursor-grabbing p-(var(--table-cell-padding)) hover:bg-(var(--table-row-hover-bg)) rounded transition-colors',
         isDragging && 'cursor-grabbing',
         className
       )}
@@ -34,7 +34,7 @@ export function DragHandleCell({ rowId, className }: DragHandleCellProps) {
         strokeWidth='2'
         strokeLinecap='round'
         strokeLinejoin='round'
-        className='size-4 text-muted-foreground'
+        className='size-4 text-(var(--table-cell-text-color))'
       >
         <circle cx='9' cy='12' r='1' />
         <circle cx='9' cy='5' r='1' />

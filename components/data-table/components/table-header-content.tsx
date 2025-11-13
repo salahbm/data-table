@@ -56,8 +56,7 @@ export function TableHeaderContent<TData>({
                 key={header.id}
                 className={cn(
                   className?.th,
-                  canSort && 'cursor-pointer select-none',
-                  'first:rounded-tl-2xl last:rounded-tr-2xl'
+                  canSort && 'cursor-pointer select-none'
                 )}
                 style={getCommonPinningStyles({ column })}
               >
@@ -70,7 +69,7 @@ export function TableHeaderContent<TData>({
                       {title}
                       <ChevronDown className='size-4 text-muted-foreground group-data-[sort=desc]:block hidden' />
                       <ChevronUp className='size-4 text-muted-foreground group-data-[sort=asc]:block hidden' />
-                      <ChevronsUpDown className='size-4 text-muted-foreground group-data-[sort=false]:block hidden' />
+                      <ChevronsUpDown className='size-4 text-muted-foreground/50 group-data-[sort=false]:block hidden' />
                     </PopoverTrigger>
                     <PopoverContent align='center' className='w-32 p-1'>
                       <div className='flex flex-col'>
@@ -128,7 +127,7 @@ export function TableHeaderContent<TData>({
                     {title}
                     <ChevronUp className='size-4 text-muted-foreground hidden group-data-[sort=asc]:block' />
                     <ChevronDown className='size-4 text-muted-foreground hidden group-data-[sort=desc]:block' />
-                    <ChevronDown className='size-4 text-red-400/90 hidden group-data-[sort=false]:block' />
+                    <ChevronsUpDown className='size-4 text-muted-foreground/50 hidden group-data-[sort=false]:block' />
                   </button>
                 ) : (
                   <span>{title}</span>

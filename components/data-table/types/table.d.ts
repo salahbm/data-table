@@ -6,6 +6,31 @@ declare module '@tanstack/table-core' {
     // t?: ReturnType<typeof useTranslation>['t'] // un comment this line if you are using next i18n
     form?: UseFormReturn<TData, unknown, undefined>
     /**
+     * @default undefined
+     * @description the total number of items in the table
+     */
+    totalItems?: number
+    /**
+     * @default false
+     * @description if turned on, the reset sortings button will be shown
+     */
+    enableResetSortings?: boolean
+    /**
+     * @default false
+     * @description if turned on, the pagination reset button will be shown
+     */
+    enablePaginationReset?: boolean
+    /**
+     * @default false
+     * @description if turned on, the download button will be shown
+     */
+    enableDownload?: boolean
+    /**
+     * @default false
+     * @description if turned on, the view options button will be shown
+     */
+    enableViewOptions?: boolean
+    /**
      * @default false
      * @description if turned on, the rows will be draggable
      */

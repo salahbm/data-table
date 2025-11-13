@@ -22,10 +22,7 @@ function AnimatedRows<TData>({
         <motion.tr
           key={row.id}
           data-state={row.getIsSelected() && 'selected'}
-          className={cn(
-            'hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors',
-            className?.tr
-          )}
+          className={cn('data-table-row', className?.tr)}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}

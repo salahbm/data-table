@@ -1,6 +1,5 @@
 'use client'
 import { useQuery } from '@tanstack/react-query'
-import { Sheet } from 'lucide-react'
 import { parseAsInteger, parseAsJson, useQueryStates } from 'nuqs'
 import { useEffect, useEffectEvent, useState } from 'react'
 import {
@@ -10,9 +9,6 @@ import {
   SORT_VALIDATOR,
   useDataTable,
 } from '@/components/data-table'
-import { DataTableResetSortings } from '@/components/data-table/components/table-reset-sorting'
-import { DataTableViewOptions } from '@/components/data-table/components/table-view-options'
-import { Button } from '@/components/ui/button'
 import { getProducts } from '@/lib/products'
 import { Product } from '@/lib/types'
 import { DEFAULT_COLUMNS } from './default-columns'
@@ -66,6 +62,7 @@ export const DefaultTable = ({ initialData }: DefaultTableProps) => {
     getRowId: (originalRow) => originalRow.id,
     shallow: false,
     clearOnDefault: true,
+    enableRowSelection: true,
     initialState: {
       columnPinning: {
         left: ['drag-handle', 'id'],
@@ -73,35 +70,23 @@ export const DefaultTable = ({ initialData }: DefaultTableProps) => {
       },
     },
     meta: {
-      enableRowDrag: false,
       enableRowAnimations: true,
+      enableDownload: true,
+      enablePaginationReset: true,
+      enableResetSortings: true,
+      enableViewOptions: true,
+      totalItems: response.data.meta.totalItems,
       onDragEnd: (event) => setData(normalizeDragEnd(data, event)),
     },
   })
 
   return (
-    <div>
-      <div className='flex w-full items-center gap-2'>
-        <Button
-          size='sm'
-          role='button'
-          variant='ghost'
-          aria-label='Download CSV'
-          onClick={async () => alert('Download CSV is not implemented yet')}
-        >
-          <Sheet className='size-4' />
-          Download
-        </Button>
-
-        <DataTableViewOptions table={table} />
-
-        <DataTableResetSortings table={table} includePagination={false} />
-      </div>
+    <div className='h-dvh overflow-hidden'>
       <DataTable
         table={table}
         isLoading={response.isLoading}
         className={{
-          container: 'relative  max-h-[calc(100vh-280px)] overflow-y-auto',
+          container: 'relative h-screen overflow-y-auto',
         }}
       />
     </div>

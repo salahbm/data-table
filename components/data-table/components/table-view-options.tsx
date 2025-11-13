@@ -47,8 +47,7 @@ export function DataTableViewOptions<TData>({
           aria-label='Toggle columns'
           role='combobox'
           variant='outline'
-          size='sm'
-          className='relative ml-auto h-8 border-none shadow-none'
+          className='relative'
         >
           <Settings2 />
           {isAnyColumnHidden && (
@@ -61,7 +60,7 @@ export function DataTableViewOptions<TData>({
         <Command>
           <CommandList>
             <CommandEmpty>No columns</CommandEmpty>
-            <CommandGroup>
+            <CommandGroup className='no-border-scrollbar'>
               {columns.map((column) => (
                 <CommandItem
                   key={column.id}
@@ -69,7 +68,7 @@ export function DataTableViewOptions<TData>({
                     column.toggleVisibility(!column.getIsVisible())
                   }
                 >
-                  <span className='truncate'>
+                  <span className='truncate capitalize'>
                     {column.columnDef.meta?.label ?? column.id}
                   </span>
                   <Check

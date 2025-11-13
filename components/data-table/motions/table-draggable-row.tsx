@@ -43,10 +43,7 @@ export function DraggableRow<TData>({
       data-state={row.getIsSelected() && 'selected'}
       data-dragging={isDragging}
       data-slot='table-row'
-      className={cn(
-        'border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted',
-        className?.tr
-      )}
+      className={cn('data-table-row', className?.tr)}
     >
       {enableRowDrag && (
         <TableCell className={cn('w-10', className?.td)}>

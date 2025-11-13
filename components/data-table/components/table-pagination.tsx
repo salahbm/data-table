@@ -84,10 +84,7 @@ export default function Pagination<TData>({
 
   return (
     <div
-      className={cn(
-        'flex w-full items-center justify-between pt-5 pb-6',
-        className
-      )}
+      className={cn('flex w-full items-center justify-between pt-4', className)}
     >
       <Select
         value={`${pageSize}`}

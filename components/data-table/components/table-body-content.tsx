@@ -38,10 +38,7 @@ function TableBodyContent<TData>({
       <AnimatePresence mode='popLayout'>
         <motion.tr
           key='no-data'
-          className={cn(
-            'hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors',
-            className?.tr
-          )}
+          className={cn('data-table-row', className?.tr)}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

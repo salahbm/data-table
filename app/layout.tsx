@@ -48,7 +48,7 @@ export default function RootLayout({
           <Header />
           <div className='flex flex-1 overflow-hidden'>
             <Sidebar />
-            <main className='flex-1 overflow-auto p-6 lg:p-8'>
+            <main className='flex-1 overflow-auto p-6 lg:py-8 lg:px-10 bg-gray-50'>
               <QueryProvider>
                 <NuqsAdapter>{children}</NuqsAdapter>
               </QueryProvider>
