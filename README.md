@@ -2,6 +2,11 @@
 
 A powerful, feature-rich React data table component built with TypeScript, featuring drag-and-drop functionality, animations, pagination, sorting, and more.
 
+
+##Video Showcase
+
+![Video](./app/showcase.mp4)
+
 ## ✨ Features Overview
 
 This data-table component is a comprehensive, production-ready solution that combines the power of TanStack Table with modern React patterns, providing extensive customization options while maintaining excellent performance and user experience.
