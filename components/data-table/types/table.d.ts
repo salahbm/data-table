@@ -44,6 +44,10 @@ declare module '@tanstack/table-core' {
      * @param event returns array of the data after the drag and drop ends
      */
     onDragEnd?: (event: DragEndEvent) => void
+    /**
+     * @param row returns the row data after the row is clicked
+     */
+    onRowClick?: (row: Row<TData>) => void
   }
 }
 

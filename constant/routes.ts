@@ -1,7 +1,10 @@
 import {
   BetweenHorizontalEnd,
   Diameter,
+  Edit,
+  ListCheck,
   Route as LucideRoute,
+  RadiationIcon,
   Table,
 } from 'lucide-react'
 
@@ -29,7 +32,7 @@ const routes: Route[] = [
     },
   },
   {
-    id: 'with-modal',
+    id: 'with-modal', // onclick on cell should open modal
     label: 'With Modal',
     href: '/with-modal',
     icon: Diameter,
@@ -39,7 +42,7 @@ const routes: Route[] = [
     },
   },
   {
-    id: 'with-dynamic-row',
+    id: 'with-dynamic-row', // onclick on row should enlarge the row to show all text
     label: 'With Dynamic Row',
     href: '/with-dynamic-row',
     icon: BetweenHorizontalEnd,
@@ -49,7 +52,7 @@ const routes: Route[] = [
     },
   },
   {
-    id: 'with-navigation',
+    id: 'with-navigation', // on click row should navigate to the row details
     label: 'With Navigation',
     href: '/with-navigation',
     icon: LucideRoute,
@@ -68,17 +71,37 @@ const routes: Route[] = [
           description: 'With Child 1 Table Component',
         },
       },
-      {
-        id: 'with-child-2',
-        label: 'With Child 2',
-        href: '/with-child-2',
-        icon: LucideRoute,
-        meta: {
-          title: 'With Child 2',
-          description: 'With Child 2 Table Component',
-        },
-      },
     ],
+  },
+  {
+    id: 'with-checkbox',
+    label: 'With Checkbox',
+    href: '/with-checkbox',
+    icon: ListCheck,
+    meta: {
+      title: 'With Checkbox',
+      description: 'With Checkbox Table Component',
+    },
+  },
+  {
+    id: 'with-radio',
+    label: 'With Radio',
+    href: '/with-radio',
+    icon: RadiationIcon,
+    meta: {
+      title: 'With Radio',
+      description: 'With Radio Table Component',
+    },
+  },
+  {
+    id: 'with-row-action',
+    label: 'With Row Action',
+    href: '/with-row-action',
+    icon: Edit,
+    meta: {
+      title: 'With Row Action',
+      description: 'With Row Action Table Component',
+    },
   },
 ]
 

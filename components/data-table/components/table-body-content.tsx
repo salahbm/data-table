@@ -90,6 +90,7 @@ function TableBodyContent<TData>({
           key={row.id}
           data-state={row.getIsSelected() && 'selected'}
           className={className?.tr}
+          onClick={() => table.options.meta?.onRowClick?.(row)}
         >
           {row.getVisibleCells().map((cell) => (
             <TableCell
