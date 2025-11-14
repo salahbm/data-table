@@ -5,7 +5,11 @@ A powerful, feature-rich React data table component built with TypeScript, featu
 
 ##Video Showcase
 
-![Video](./app/showcase.mp4)
+<video width="600" autoplay loop muted>
+  <source src="./app/showcase.MP4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
 
 ## ✨ Features Overview
 
