@@ -1,11 +1,21 @@
 'use client'
 
 import { ColumnDef } from '@tanstack/react-table'
-import Link from 'next/link'
 import { Badge } from '@/components/ui/badge'
+import { RadioGroupItem } from '@/components/ui/radio-group'
 import { Product } from '@/lib/types'
 
-export const WITH_NAVIGATION_COLUMNS: ColumnDef<Product>[] = [
+export const DOUBLE_TABLES_FIRST_COLUMNS: ColumnDef<Product>[] = [
+  {
+    id: 'select',
+    header: () => null,
+    cell: ({ row }) => (
+      <RadioGroupItem value={row.id} aria-label='Select row' />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+    size: 50,
+  },
   {
     accessorKey: 'id',
     header: 'ID',
@@ -18,17 +28,6 @@ export const WITH_NAVIGATION_COLUMNS: ColumnDef<Product>[] = [
   {
     accessorKey: 'name',
     header: 'Name',
-    cell: ({ row }) => {
-      const product = row.original
-      return (
-        <Link
-          href={`/with-navigation/${product.id}`}
-          className='text-blue-600 hover:underline cursor-pointer flex items-center w-full justify-start'
-        >
-          {product.name}
-        </Link>
-      )
-    },
     size: 250,
     meta: {
       enableSorting: true,
@@ -41,6 +40,45 @@ export const WITH_NAVIGATION_COLUMNS: ColumnDef<Product>[] = [
       <Badge variant='outline'>{row.getValue('category')}</Badge>
     ),
     size: 150,
+  },
+  {
+    accessorKey: 'brand',
+    header: 'Brand',
+    size: 130,
+  },
+  {
+    accessorKey: 'price',
+    header: 'Price',
+    cell: ({ row }) => {
+      const price = parseFloat(row.getValue('price'))
+      const formatted = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      }).format(price)
+      return <div className='font-medium'>{formatted}</div>
+    },
+    size: 120,
+  },
+]
+
+// Second table shows related products (same category)
+export const DOUBLE_TABLES_SECOND_COLUMNS: ColumnDef<Product>[] = [
+  {
+    accessorKey: 'id',
+    header: 'Related ID',
+    size: 120,
+    meta: {
+      enableHiding: true,
+      enableSorting: true,
+    },
+  },
+  {
+    accessorKey: 'name',
+    header: 'Product Name',
+    size: 250,
+    meta: {
+      enableSorting: true,
+    },
   },
   {
     accessorKey: 'brand',
@@ -94,22 +132,5 @@ export const WITH_NAVIGATION_COLUMNS: ColumnDef<Product>[] = [
       )
     },
     size: 100,
-  },
-  {
-    accessorKey: 'createdAt',
-    header: 'Created At',
-    cell: ({ row }) => {
-      const date = new Date(row.getValue('createdAt'))
-      return (
-        <div className='text-sm'>
-          {date.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-          })}
-        </div>
-      )
-    },
-    size: 130,
   },
 ]

@@ -11,7 +11,6 @@ export default async function Home({
   const page = Number((await searchParams).page) || 1
   const pageSize = Number((await searchParams).pageSize) || 50
   const sort = (await searchParams).sort || DEFAULT_SORT
-  console.log(`🚀 ~ sort:`, sort)
 
   // Fetch data on the server
   const initialData = getProducts({

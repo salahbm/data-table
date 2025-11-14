@@ -6,6 +6,8 @@ import {
   Route as LucideRoute,
   RadiationIcon,
   Table,
+  Table2Icon,
+  TabletSmartphone,
 } from 'lucide-react'
 
 interface Route {
@@ -101,6 +103,28 @@ const routes: Route[] = [
     meta: {
       title: 'With Row Action',
       description: 'With Row Action Table Component',
+    },
+  },
+  {
+    id: 'double-tables',
+    label: 'Double Tables',
+    href: '/double-tables',
+    icon: TabletSmartphone,
+    meta: {
+      title: 'Double Tables',
+      description:
+        'Double Tables - click radio on the 1st table to show related 2nd  data in 2nd table, no search params in url to stop propagation',
+    },
+  },
+  {
+    id: 'table-inside-modal',
+    label: 'Table Inside Modal',
+    href: '/table-inside-modal',
+    icon: Table2Icon,
+    meta: {
+      title: 'Table Inside Modal',
+      description:
+        'Table Inside Modal - click on the row opens the modal with table inside (inside modal do not have search params)',
     },
   },
 ]

@@ -2,7 +2,7 @@
 
 import { Table } from '@tanstack/react-table'
 import { ChevronDown, ChevronsUpDown, ChevronUp, EyeOff, X } from 'lucide-react'
-import { Fragment } from 'react'
+import { Fragment, ReactNode } from 'react'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -46,10 +46,14 @@ export function TableHeaderContent<TData>({
             const canSort = column.getCanSort() && meta.enableSorting
             const canHide = column.getCanHide() && meta.enableHiding
             const sorted = column.getIsSorted()
-            const title =
-              typeof column.columnDef.header === 'string'
-                ? column.columnDef.header
-                : String(column.id)
+
+            // Determine title content safely
+            let titleContent: ReactNode
+            if (typeof column.columnDef.header === 'function') {
+              titleContent = column.columnDef.header({ column, header, table })
+            } else {
+              titleContent = column.columnDef.header
+            }
 
             return (
               <TableHead
@@ -66,7 +70,7 @@ export function TableHeaderContent<TData>({
                       className='flex group w-full items-center justify-center gap-2'
                       data-sort={String(sorted)}
                     >
-                      {title}
+                      {titleContent}
                       <ChevronDown className='size-4 text-muted-foreground group-data-[sort=desc]:block hidden' />
                       <ChevronUp className='size-4 text-muted-foreground group-data-[sort=asc]:block hidden' />
                       <ChevronsUpDown className='size-4 text-muted-foreground/50 group-data-[sort=false]:block hidden' />
@@ -124,13 +128,13 @@ export function TableHeaderContent<TData>({
                       else column.clearSorting()
                     }}
                   >
-                    {title}
+                    {titleContent}
                     <ChevronUp className='size-4 text-muted-foreground hidden group-data-[sort=asc]:block' />
                     <ChevronDown className='size-4 text-muted-foreground hidden group-data-[sort=desc]:block' />
                     <ChevronsUpDown className='size-4 text-muted-foreground/50 hidden group-data-[sort=false]:block' />
                   </button>
                 ) : (
-                  <span>{title}</span>
+                  titleContent
                 )}
               </TableHead>
             )

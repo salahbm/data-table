@@ -5,7 +5,6 @@ import { useEffect, useEffectEvent, useState } from 'react'
 import {
   DataTable,
   DEFAULT_SORT,
-  normalizeDragEnd,
   SORT_VALIDATOR,
   useDataTable,
 } from '@/components/data-table'
@@ -63,6 +62,7 @@ export const WithCheckboxTable = ({ initialData }: WithCheckboxTableProps) => {
     shallow: false,
     clearOnDefault: true,
     enableRowSelection: true,
+    enableMultiRowSelection: true,
     initialState: {
       columnPinning: {
         left: ['drag-handle', 'select', 'id'],
@@ -76,7 +76,6 @@ export const WithCheckboxTable = ({ initialData }: WithCheckboxTableProps) => {
       enableResetSortings: true,
       enableViewOptions: true,
       totalItems: response.data.meta.totalItems,
-      onDragEnd: (event) => setData(normalizeDragEnd(data, event)),
     },
   })
 

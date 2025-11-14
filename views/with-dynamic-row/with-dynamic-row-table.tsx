@@ -27,7 +27,9 @@ interface WithDynamicRowTableProps {
   }
 }
 
-export const WithDynamicRowTable = ({ initialData }: WithDynamicRowTableProps) => {
+export const WithDynamicRowTable = ({
+  initialData,
+}: WithDynamicRowTableProps) => {
   const [data, setData] = useState<Product[]>(initialData.data)
   const [params] = useQueryStates({
     page: parseAsInteger.withDefault(1),

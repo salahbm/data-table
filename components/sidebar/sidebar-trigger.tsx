@@ -36,7 +36,10 @@ function Sidebar() {
           onClick={toggle}
         >
           <ChevronRight
-            className={cn('size-5', isMinimized ? 'rotate-0' : 'rotate-180')}
+            className={cn(
+              'size-5 text-foreground',
+              isMinimized ? 'rotate-0' : 'rotate-180'
+            )}
           />
         </button>
 

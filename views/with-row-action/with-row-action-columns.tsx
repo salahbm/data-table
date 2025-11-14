@@ -1,6 +1,7 @@
 'use client'
 
 import { ColumnDef } from '@tanstack/react-table'
+import { Copy, Edit, Eye, MoreHorizontal, Trash } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -12,7 +13,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Product } from '@/lib/types'
-import { MoreHorizontal, Eye, Edit, Trash, Copy } from 'lucide-react'
 
 export const WITH_ROW_ACTION_COLUMNS: ColumnDef<Product>[] = [
   {
@@ -127,7 +127,7 @@ export const WITH_ROW_ACTION_COLUMNS: ColumnDef<Product>[] = [
           <DropdownMenuContent align='end'>
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(product.id)}
+              onClick={() => navigator.clipboard?.writeText(product.id)}
             >
               <Copy className='mr-2 h-4 w-4' />
               Copy ID

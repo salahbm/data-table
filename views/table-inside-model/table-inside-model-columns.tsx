@@ -1,11 +1,11 @@
 'use client'
 
 import { ColumnDef } from '@tanstack/react-table'
-import Link from 'next/link'
 import { Badge } from '@/components/ui/badge'
 import { Product } from '@/lib/types'
 
-export const WITH_NAVIGATION_COLUMNS: ColumnDef<Product>[] = [
+// Main table columns
+export const TABLE_INSIDE_MODEL_COLUMNS: ColumnDef<Product>[] = [
   {
     accessorKey: 'id',
     header: 'ID',
@@ -18,17 +18,6 @@ export const WITH_NAVIGATION_COLUMNS: ColumnDef<Product>[] = [
   {
     accessorKey: 'name',
     header: 'Name',
-    cell: ({ row }) => {
-      const product = row.original
-      return (
-        <Link
-          href={`/with-navigation/${product.id}`}
-          className='text-blue-600 hover:underline cursor-pointer flex items-center w-full justify-start'
-        >
-          {product.name}
-        </Link>
-      )
-    },
     size: 250,
     meta: {
       enableSorting: true,
@@ -82,6 +71,55 @@ export const WITH_NAVIGATION_COLUMNS: ColumnDef<Product>[] = [
     },
     size: 100,
   },
+]
+
+// Modal table columns (related products)
+export const MODAL_TABLE_COLUMNS: ColumnDef<Product>[] = [
+  {
+    accessorKey: 'id',
+    header: 'ID',
+    size: 100,
+  },
+  {
+    accessorKey: 'name',
+    header: 'Product Name',
+    size: 200,
+  },
+  {
+    accessorKey: 'price',
+    header: 'Price',
+    cell: ({ row }) => {
+      const price = parseFloat(row.getValue('price'))
+      const formatted = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      }).format(price)
+      return <div className='font-medium'>{formatted}</div>
+    },
+    size: 100,
+  },
+  {
+    accessorKey: 'stock',
+    header: 'Stock',
+    cell: ({ row }) => {
+      const stock = row.getValue('stock') as number
+      return (
+        <div className={stock < 50 ? 'text-destructive font-medium' : ''}>
+          {stock}
+        </div>
+      )
+    },
+    size: 80,
+  },
+  {
+    accessorKey: 'rating',
+    header: 'Rating',
+    cell: ({ row }) => {
+      const rating = row.getValue('rating') as number
+      return <span>{rating.toFixed(1)}</span>
+    },
+    size: 80,
+  },
   {
     accessorKey: 'available',
     header: 'Available',
@@ -94,22 +132,5 @@ export const WITH_NAVIGATION_COLUMNS: ColumnDef<Product>[] = [
       )
     },
     size: 100,
-  },
-  {
-    accessorKey: 'createdAt',
-    header: 'Created At',
-    cell: ({ row }) => {
-      const date = new Date(row.getValue('createdAt'))
-      return (
-        <div className='text-sm'>
-          {date.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-          })}
-        </div>
-      )
-    },
-    size: 130,
   },
 ]

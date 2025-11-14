@@ -3,6 +3,7 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { ChevronDown, ChevronRight } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { Product } from '@/lib/types'
 
 export const WITH_DYNAMIC_ROW_COLUMNS: ColumnDef<Product>[] = [
@@ -11,8 +12,10 @@ export const WITH_DYNAMIC_ROW_COLUMNS: ColumnDef<Product>[] = [
     header: () => null,
     cell: ({ row }) => {
       return row.getCanExpand() ? (
-        <button
+        <Button
+          variant='ghost'
           type='button'
+          size='icon'
           onClick={row.getToggleExpandedHandler()}
           className='cursor-pointer'
         >
@@ -21,7 +24,7 @@ export const WITH_DYNAMIC_ROW_COLUMNS: ColumnDef<Product>[] = [
           ) : (
             <ChevronRight className='h-4 w-4' />
           )}
-        </button>
+        </Button>
       ) : null
     },
     size: 50,

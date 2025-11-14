@@ -7,13 +7,10 @@ import { Product } from '@/lib/types'
 
 export const WITH_CHECKBOX_COLUMNS: ColumnDef<Product>[] = [
   {
-    id: 'select',
+    accessorKey: 'select',
     header: ({ table }) => (
       <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && 'indeterminate')
-        }
+        checked={table.getIsAllPageRowsSelected()}
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label='Select all'
       />

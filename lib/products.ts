@@ -90,7 +90,6 @@ export function getProducts({
   pageSize?: number
   sort?: ISort[]
 } = {}) {
-  console.log(`🚀 ~ sort:`, sort)
   // Initialize products if not already done
   initializeProducts()
 
