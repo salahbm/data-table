@@ -2,24 +2,103 @@
 
 A powerful, feature-rich React data table component built with TypeScript, featuring drag-and-drop functionality, animations, pagination, sorting, and more.
 
-## ✨ Features
+## ✨ Features Overview
 
-- **🔄 Drag & Drop Rows**: Reorder rows with smooth drag-and-drop using DnD Kit
-- **🎭 Row Animations**: Beautiful animations powered by Framer Motion
-- **📄 Pagination**: Built-in pagination with customizable controls
-- **🔀 Sorting**: Multi-column sorting with URL state persistence
-- **📌 Column Pinning**: Pin columns to left or right for better UX
-- **✅ Row Selection**: Select single or multiple rows
-- **👁️ View Options**: Show/hide columns dynamically
-- **🔄 Reset Controls**: Reset sorting and pagination states
-- **📊 Loading States**: Skeleton loading with proper UX
-- **📱 Responsive**: Mobile-friendly design
-- **♿ Accessible**: WCAG compliant with proper ARIA labels
-- **🎨 Customizable**: Extensive styling options via CSS variables
-- **🔗 URL State**: Query parameters for sharing and bookmarking
-- **📋 CSV Export**: Download data as CSV (placeholder implementation)
+This data-table component is a comprehensive, production-ready solution that combines the power of TanStack Table with modern React patterns, providing extensive customization options while maintaining excellent performance and user experience.
 
-## 🛠️ Tech Stack
+## 🎯 Core Features
+
+### **Advanced Sorting & Filtering**
+- **Multi-column sorting** with visual indicators (ascending/descending)
+- **Sortable columns** with customizable sort behavior per column
+- **Sort reset functionality** to clear all sorting states
+- **Server-side and client-side sorting** support
+- **URL state persistence** for sorting
+
+### **Pagination System**
+- **Configurable page sizes** (10, 20, 50, 100 items per page)
+- **Server-side pagination** with total count tracking
+- **Pagination reset** functionality
+- **Navigation controls** (first, previous, next, last pages)
+- **Page information display** (current page, total pages, total items)
+
+### **Column Management**
+- **Column hiding/showing** with view options dropdown
+- **Column pinning** (left/right pinning for important columns)
+- **Column resizing** capabilities
+- **Column reordering** via drag-and-drop
+- **Responsive column visibility** controls
+
+### **Row Selection**
+- **Single row selection** (radio buttons)
+- **Multi-row selection** (checkboxes)
+- **Select all/deselect all** functionality
+- **Selection state management** with visual indicators
+
+### **Drag & Drop Functionality**
+- **Row reordering** via drag-and-drop
+- **Custom drag end handlers** for data manipulation
+- **Visual feedback** during drag operations
+- **Normalized drag end events** for consistent data handling
+
+### **Interactive Features**
+- **Row click handlers** for custom actions
+- **Expandable rows** with dynamic content
+- **Animated row transitions** for smooth UX
+- **Loading states** with skeleton placeholders
+- **Row actions dropdown menus**
+
+### **Data Export**
+- **CSV download functionality** (framework in place)
+- **Data export controls** in the table header
+
+### **Visual Customization**
+- **Theme support** with CSS variables
+- **Customizable classNames** for all table elements
+- **Responsive design** with mobile-friendly layouts
+- **Status indicators** and badges for data states
+- **Modal dialogs** for detailed views
+
+## 📋 Table Variants
+
+The project includes 9 different table implementations showcasing various features:
+
+1. **Default Table** - Basic table with all standard features
+2. **With Modal** - Click cells to open detailed modal dialogs
+3. **With Dynamic Row** - Expandable rows showing full content
+4. **With Navigation** - Row clicks navigate to detail pages
+5. **With Checkbox** - Multi-select functionality with checkboxes
+6. **With Radio** - Single-select functionality with radio buttons
+7. **With Row Actions** - Dropdown menus with row-specific actions
+8. **Double Tables** - Master-detail tables with radio selection
+9. **Table Inside Modal** - Nested tables within modal dialogs
+
+## 🔧 Technical Features
+
+### **Performance Features:**
+- **Virtual scrolling** support (via container height limits)
+- **Debounced search/filtering** (configurable timing)
+- **Efficient re-rendering** with React optimizations
+- **Memory management** for large datasets
+
+### **Developer Experience:**
+- **TypeScript support** with full type safety
+- **Composable architecture** with reusable components
+- **Extensible meta configuration** for custom behaviors
+- **URL state synchronization** with query parameters
+- **Hook-based API** (`useDataTable`) for easy integration
+
+### **Accessibility:**
+- **ARIA labels** and roles for screen readers
+- **Keyboard navigation** support
+- **Focus management** for interactive elements
+- **Semantic HTML** structure
+
+### **Animation & Motion:**
+- **Framer Motion integration** for smooth transitions
+- **Row entry/exit animations**
+- **Drag feedback animations**
+- **Loading state animations**
 
 - **Framework**: [Next.js 16](https://nextjs.org/)
 - **Table Logic**: [TanStack React Table v8](https://tanstack.com/table)
@@ -51,7 +130,7 @@ bun install
 npm run dev
 # or
 yarn dev
-# or
+# orwhat s
 bun dev
 ```
 
