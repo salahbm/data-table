@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+import { DataTableSkeleton } from '@/components/data-table/components/table-skeleton'
 import { getProducts } from '@/lib/products'
 import { TableInsideModel } from '@/views/table-inside-model'
 
@@ -9,5 +11,11 @@ export default async function TableInsideModelPage() {
     sort: [],
   })
 
-  return <TableInsideModel initialData={initialData.data} />
+  return (
+    <Suspense
+      fallback={<DataTableSkeleton columnCount={initialData.data.length} />}
+    >
+      <TableInsideModel initialData={initialData.data} />
+    </Suspense>
+  )
 }
